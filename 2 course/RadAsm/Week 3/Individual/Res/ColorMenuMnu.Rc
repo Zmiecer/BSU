@@ -1,0 +1,18 @@
+#define IDR_MENU 10000
+#define IDM_FILE_EXIT 10001
+#define IDM_COLOR1 10002
+#define IDM_COLOR2 10003
+#define IDM_COLOR3 10004
+IDR_MENU MENUEX
+BEGIN
+  POPUP "F&ile"
+  BEGIN
+    MENUITEM "E&xit",IDM_FILE_EXIT
+  END
+  POPUP "&Color"
+  BEGIN
+    MENUITEM "Color of the &first",IDM_COLOR1
+    MENUITEM "Color of the &second",IDM_COLOR2
+    MENUITEM "Color of the &third",IDM_COLOR3
+  END
+END

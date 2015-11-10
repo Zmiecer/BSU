@@ -1,0 +1,3 @@
+#include "Res/Dialog 2Mnu.rc"
+#include "Res/Dialog 2Dlg.rc"
+#include "Res/Dialog in a dialogDlg.rc"

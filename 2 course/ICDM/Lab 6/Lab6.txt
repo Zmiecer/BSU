@@ -1,0 +1,579 @@
+> plot(dat,type="p",main="Корреляционное поле",xlab="X", ylab="Y")
+> legend("topleft",legend=c("1","2"),pch=c(1,2))
+> plot(dat,col=ifelse(cl$cluster==1,"blue","green"))
+> legend("topleft",legend=c("1","2"),fill=c("blue","green"))
+> library(MASS)
+> rnorm(n,mean=sr_znach,sd=sr_kv_otkl)
+Error in rnorm(n, mean = sr_znach, sd = sr_kv_otkl) : 
+  object 'sr_znach' not found
+> rnorm(10,mean=3,sd=2)
+ [1]  2.456684  3.856519  2.729599  2.361090  8.301125 -1.557889  3.824506  2.086192
+ [9]  6.034424  5.075953
+> rnorm(20,mean=0,sd=3)
+ [1]  3.06178927  2.35700351  0.08157678 -0.90430346  1.37607742  1.42982542
+ [7] -4.15037481  2.01372516 -3.76286778  1.36978640  2.30961563  0.07757831
+[13]  2.78767540  4.55240374  2.11115155  2.78001871  0.30054916 -1.64558692
+[19] -0.52619544 -0.36849993
+> rnorm(10,mean=9,sd=3)
+ [1] 11.610309 16.192384 10.707109 12.501363 11.184967  7.907598  5.050008  7.411658
+ [9]  7.236903  8.645425
+> x<-rnorm(20,mean=0,sd=3)
+> y<-rnorm(10,mean=9,sd=3)
+> cbind(x,y)
+               x         y
+ [1,] -1.4164964  9.367923
+ [2,]  2.1801909  8.014026
+ [3,] -2.2451211  9.012637
+ [4,]  2.7369472  8.684328
+ [5,] -1.5167539 13.835114
+ [6,] -0.6090485 13.175425
+ [7,] -0.9986053 12.110367
+ [8,] -6.0246984  7.787276
+ [9,] -4.4738795  2.123863
+[10,]  0.7645926  8.334671
+[11,] -7.1424243  9.367923
+[12,] -1.9750846  8.014026
+[13,] -2.3491086  9.012637
+[14,] -1.2357719  8.684328
+[15,] -7.8772079 13.835114
+[16,]  2.4755089 13.175425
+[17,] -0.4802323 12.110367
+[18,] -8.6795564  7.787276
+[19,] -1.3933974  2.123863
+[20,] -3.9419967  8.334671
+> x<-rnorm(20,mean=0,sd=3)
+> x<-rnorm(10,mean=9,sd=0)
+> x<-x
+> x+=x
+Error: unexpected '=' in "x+="
+> x<-x+x
+> x<-rnorm(20,mean=0,sd=3)
+> y<-rnorm(20,mean=0,sd=3)
+> x1<-rnorm(10,mean=9,sd=3)
+> y1<-orm(10,mean=9,sd=3)
+Error: could not find function "orm"
+> y1<-rnorm(10,mean=9,sd=3)
+> x
+ [1]  0.04427311  4.69543584  5.68792832  0.71841401 -4.12402005 -5.92476697
+ [7] -4.63251346  0.30365566 -0.29972089  1.48458333  2.81558112  6.52185179
+[13]  5.81834585 -7.89392504  2.20168650  1.23373919  1.27093502 -0.94739218
+[19]  0.74010961 -4.25875410
+> x2<-x
+> y2<-y
+> x<-c(x1,x2)
+> y<-c(y1,y2)
+> cbind(x,y)
+                x          y
+ [1,]  8.22402092  7.0754806
+ [2,] 14.61037070  3.2547994
+ [3,]  8.29956573  7.0421787
+ [4,]  4.54521042  9.2456392
+ [5,] 10.14299722  8.5879915
+ [6,] 11.56471851  9.8904233
+ [7,] 10.53064648  5.9515048
+ [8,]  5.24244012  5.6582027
+ [9,]  8.89709326  6.4615544
+[10,] 10.16520327  8.2039967
+[11,]  0.04427311 -5.9119402
+[12,]  4.69543584  1.9695539
+[13,]  5.68792832 -1.0039695
+[14,]  0.71841401 -0.6220051
+[15,] -4.12402005 -1.8925207
+[16,] -5.92476697 -1.0779622
+[17,] -4.63251346 -5.0588456
+[18,]  0.30365566 -0.3726697
+[19,] -0.29972089  1.2567680
+[20,]  1.48458333  0.6696768
+[21,]  2.81558112  2.3919287
+[22,]  6.52185179  2.1486382
+[23,]  5.81834585  0.7240858
+[24,] -7.89392504 -3.3658980
+[25,]  2.20168650  0.9299418
+[26,]  1.23373919  0.6105068
+[27,]  1.27093502  2.2225203
+[28,] -0.94739218 -0.7895427
+[29,]  0.74010961  0.1448802
+[30,] -4.25875410  3.0618859
+> xy<-cbind(x,y)
+> xy
+                x          y
+ [1,]  8.22402092  7.0754806
+ [2,] 14.61037070  3.2547994
+ [3,]  8.29956573  7.0421787
+ [4,]  4.54521042  9.2456392
+ [5,] 10.14299722  8.5879915
+ [6,] 11.56471851  9.8904233
+ [7,] 10.53064648  5.9515048
+ [8,]  5.24244012  5.6582027
+ [9,]  8.89709326  6.4615544
+[10,] 10.16520327  8.2039967
+[11,]  0.04427311 -5.9119402
+[12,]  4.69543584  1.9695539
+[13,]  5.68792832 -1.0039695
+[14,]  0.71841401 -0.6220051
+[15,] -4.12402005 -1.8925207
+[16,] -5.92476697 -1.0779622
+[17,] -4.63251346 -5.0588456
+[18,]  0.30365566 -0.3726697
+[19,] -0.29972089  1.2567680
+[20,]  1.48458333  0.6696768
+[21,]  2.81558112  2.3919287
+[22,]  6.52185179  2.1486382
+[23,]  5.81834585  0.7240858
+[24,] -7.89392504 -3.3658980
+[25,]  2.20168650  0.9299418
+[26,]  1.23373919  0.6105068
+[27,]  1.27093502  2.2225203
+[28,] -0.94739218 -0.7895427
+[29,]  0.74010961  0.1448802
+[30,] -4.25875410  3.0618859
+> n<-30
+> n.train<-floor(n*0.7)
+> n.test<-n-n.train
+> idx.train<-sample(1:n,n.train)
+> data.train<-xy[idx.train,]
+> idx.test<-(1:n)[!(1:n %in% idx.train)]
+> mod<-qda(data.train,cl.train)
+> cl<-kmeans(xy,2)
+> xy
+                x          y
+ [1,]  8.22402092  7.0754806
+ [2,] 14.61037070  3.2547994
+ [3,]  8.29956573  7.0421787
+ [4,]  4.54521042  9.2456392
+ [5,] 10.14299722  8.5879915
+ [6,] 11.56471851  9.8904233
+ [7,] 10.53064648  5.9515048
+ [8,]  5.24244012  5.6582027
+ [9,]  8.89709326  6.4615544
+[10,] 10.16520327  8.2039967
+[11,]  0.04427311 -5.9119402
+[12,]  4.69543584  1.9695539
+[13,]  5.68792832 -1.0039695
+[14,]  0.71841401 -0.6220051
+[15,] -4.12402005 -1.8925207
+[16,] -5.92476697 -1.0779622
+[17,] -4.63251346 -5.0588456
+[18,]  0.30365566 -0.3726697
+[19,] -0.29972089  1.2567680
+[20,]  1.48458333  0.6696768
+[21,]  2.81558112  2.3919287
+[22,]  6.52185179  2.1486382
+[23,]  5.81834585  0.7240858
+[24,] -7.89392504 -3.3658980
+[25,]  2.20168650  0.9299418
+[26,]  1.23373919  0.6105068
+[27,]  1.27093502  2.2225203
+[28,] -0.94739218 -0.7895427
+[29,]  0.74010961  0.1448802
+[30,] -4.25875410  3.0618859
+> xy
+                x          y
+ [1,]  8.22402092  7.0754806
+ [2,] 14.61037070  3.2547994
+ [3,]  8.29956573  7.0421787
+ [4,]  4.54521042  9.2456392
+ [5,] 10.14299722  8.5879915
+ [6,] 11.56471851  9.8904233
+ [7,] 10.53064648  5.9515048
+ [8,]  5.24244012  5.6582027
+ [9,]  8.89709326  6.4615544
+[10,] 10.16520327  8.2039967
+[11,]  0.04427311 -5.9119402
+[12,]  4.69543584  1.9695539
+[13,]  5.68792832 -1.0039695
+[14,]  0.71841401 -0.6220051
+[15,] -4.12402005 -1.8925207
+[16,] -5.92476697 -1.0779622
+[17,] -4.63251346 -5.0588456
+[18,]  0.30365566 -0.3726697
+[19,] -0.29972089  1.2567680
+[20,]  1.48458333  0.6696768
+[21,]  2.81558112  2.3919287
+[22,]  6.52185179  2.1486382
+[23,]  5.81834585  0.7240858
+[24,] -7.89392504 -3.3658980
+[25,]  2.20168650  0.9299418
+[26,]  1.23373919  0.6105068
+[27,]  1.27093502  2.2225203
+[28,] -0.94739218 -0.7895427
+[29,]  0.74010961  0.1448802
+[30,] -4.25875410  3.0618859
+> xy=read.table("f.txt")
+> dat<-xy
+> dat
+           V1         V2
+1  10.8602683  9.2251391
+2   7.7142907 12.2572959
+3  11.5643602 11.4061345
+4  14.8267140 11.2032041
+5   4.9790373  2.1521328
+6   5.8926200 10.4861304
+7   8.1543849  8.8616931
+8   8.8016147 10.1567945
+9   6.9508675 14.2852110
+10 10.2978114 11.5353089
+11  5.4253135 -4.0204121
+12 -0.5312972  2.1029047
+13  0.9661609  2.3397486
+14  3.7475868  0.6526830
+15 -2.8711475 -8.2131905
+16  5.3448603 -2.5106522
+17 -1.7509895 -2.3525493
+18 -4.2637467  0.1653942
+19 -5.1072519 -3.1196385
+20 -1.5914536  5.0540570
+21  5.1095367 -1.9030852
+22 -0.3575796 -2.9522112
+23 -2.0101049  1.6422727
+24  0.8779785 -1.3431763
+25 -3.1485300  0.3181128
+26 -0.1269364  0.4328254
+27 -0.7947033  3.3342894
+28  2.7096451  2.1600714
+29  0.3820298  1.3401247
+30  4.2974097 -0.6146318
+> dat
+           V1         V2
+1  10.8602683  9.2251391
+2   7.7142907 12.2572959
+3  11.5643602 11.4061345
+4  14.8267140 11.2032041
+5   4.9790373  2.1521328
+6   5.8926200 10.4861304
+7   8.1543849  8.8616931
+8   8.8016147 10.1567945
+9   6.9508675 14.2852110
+10 10.2978114 11.5353089
+11  5.4253135 -4.0204121
+12 -0.5312972  2.1029047
+13  0.9661609  2.3397486
+14  3.7475868  0.6526830
+15 -2.8711475 -8.2131905
+16  5.3448603 -2.5106522
+17 -1.7509895 -2.3525493
+18 -4.2637467  0.1653942
+19 -5.1072519 -3.1196385
+20 -1.5914536  5.0540570
+21  5.1095367 -1.9030852
+22 -0.3575796 -2.9522112
+23 -2.0101049  1.6422727
+24  0.8779785 -1.3431763
+25 -3.1485300  0.3181128
+26 -0.1269364  0.4328254
+27 -0.7947033  3.3342894
+28  2.7096451  2.1600714
+29  0.3820298  1.3401247
+30  4.2974097 -0.6146318
+> cl<-kmeans(dat,2)
+> cl<-kmeans(dat,3)
+> cl<-0
+> cl<-kmeans(dat,2)
+> table(cl$cluster)
+
+ 1  2 
+ 9 21 
+> cl$centers
+         V1         V2
+1 9.4514369 11.0463235
+2 0.5374199 -0.2540443
+> mod<-qda(data.train,cl.train)
+> cl
+K-means clustering with 2 clusters of sizes 9, 21
+
+Cluster means:
+         V1         V2
+1 9.4514369 11.0463235
+2 0.5374199 -0.2540443
+
+Clustering vector:
+ [1] 1 1 1 1 2 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+
+Within cluster sum of squares by cluster:
+[1]  81.64395 397.10055
+ (between_SS / total_SS =  73.2 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      
+> idx.test
+[1]  8 12 14 15 23 26 28 29 30
+> cl.train<-c(2, 2, 1, 1, 1, 1, 1, 1, 1)
+> cl.test<-c(2, 2, 1, 1, 1, 1, 1, 1, 1)
+> cl.train<-0
+> idx.train
+ [1]  1  3 27 10  2 19 20  5  9 21 16  6 13 18 24 11  7 25 17 22  4
+> cl.train<-c(1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 2)
+> mod<-qda(data.train,cl.train)
+> mod
+Call:
+qda(data.train, grouping = cl.train)
+
+Prior probabilities of groups:
+        1         2 
+0.6666667 0.3333333 
+
+Group means:
+         x        y
+1 4.007991 2.047221
+2 4.635361 4.268666
+> cl.test_est<-predict(mod,data.test)$class
+Warning message:
+In predict.qda(mod, data.test) :
+  variable names in 'newdata' do not match those in 'object'
+> View(data.train)
+> data.test<-data - data.train
+Error in data - data.train : non-numeric argument to binary operator
+> View(dat)
+> View(data.train)
+> View(data.train)
+> View(dat)
+> View(data.train)
+> data.test=read.table("f.txt")
+> data.test<-0
+> data.test=read.table("f1.txt")
+> cl.test_est<-predict(mod,data.test)$class
+Warning message:
+In predict.qda(mod, data.test) :
+  variable names in 'newdata' do not match those in 'object'
+> mod
+Call:
+qda(data.train, grouping = cl.train)
+
+Prior probabilities of groups:
+        1         2 
+0.6666667 0.3333333 
+
+Group means:
+         x        y
+1 4.007991 2.047221
+2 4.635361 4.268666
+> View(data.train)
+> View(data.test)
+> View(dat)
+> View(xy)
+> View(dat)
+> colnames(data.train)<-c("V1", "V2")
+> View(data.train)
+> cl.test_est<-predict(mod,data.test)$class
+Warning message:
+In predict.qda(mod, data.test) :
+  variable names in 'newdata' do not match those in 'object'
+> cl.test_est<-predict(mod,data.train)$class
+Warning message:
+In predict.qda(mod, data.train) :
+  variable names in 'newdata' do not match those in 'object'
+> cl.test_est<-predict(mod,data.test)$class
+Warning message:
+In predict.qda(mod, data.test) :
+  variable names in 'newdata' do not match those in 'object'
+> cl.test_est<-predict(mod,xy)$class
+Warning message:
+In predict.qda(mod, xy) :
+  variable names in 'newdata' do not match those in 'object'
+> cl.test_est<-predict(mod,idx.test)$class
+Error in predict.qda(mod, idx.test) : wrong number of variables
+> View(data.train)
+> View(data.test)
+> data.train<-xy[idx.train,]
+> cl.test_est<-predict(mod,data.train)$class
+Warning message:
+In predict.qda(mod, data.train) :
+  variable names in 'newdata' do not match those in 'object'
+> > cl.test_est<-predict(mod,data.train)$class
+Error: unexpected '>' in ">"
+> cl.test_est<-predict(mod,data.test)$class
+Warning message:
+In predict.qda(mod, data.test) :
+  variable names in 'newdata' do not match those in 'object'
+> sum(cl.test_est!=cl.test)/n.test
+[1] 0
+> idx<-idx.test[cl.test_est!=cl.test]
+> sum(cl.test_est!=cl.test)/n.test
+[1] 0
+> idx<-idx.test[cl.test_est!=cl.test]
+> plot(xy,col=ifelse(cl==1,"blue","green"))
+Error in ifelse(cl == 1, "blue", "green") : 
+  (list) object cannot be coerced to type 'double'
+> plot(dat,col=ifelse(cl==1,"blue","green"))
+Error in ifelse(cl == 1, "blue", "green") : 
+  (list) object cannot be coerced to type 'double'
+> plot(xy)
+> plot(xy,col=ifelse(cl$cluster==1,"blue","green"))
+> legend("topleft",legend=c("1","2"),fill=c("blue","green"))
+> points(xy[idx,],col="red")
+> points(xy[idx.train,],pch=2)
+> sum(cl.test_est1!=cl.test)/n.test
+[1] 0.1111111
+> idx1<-idx.test[cl.test_est1!=cl.test]
+> plot(xy,col=ifelse(cl.res==1,"blue","green"))
+Error in ifelse(cl.res == 1, "blue", "green") : object 'cl.res' not found
+> plot(xy,color=ifelse(cl.res==1,"blue","green"))
+Error in ifelse(cl.res == 1, "blue", "green") : object 'cl.res' not found
+> plot(xy,col=ifelse(cl.res==1,"blue","green"))
+Error in ifelse(cl.res == 1, "blue", "green") : object 'cl.res' not found
+> plot(xy,col=ifelse(cl$cluster==1,"blue","green"))
+> legend("topleft",legend=c("1","2"),fill=c("blue","green"))
+> points(xy[idx1,],col="red")
+> points(xy[idx.train[idx.new],],pch=3) 
+> cl.test_est1.train<-sample(1:n,cl.test)
+> cl.test_est1.train<-sample(1:9,cl.test)
+> cl.test_est1.change<-cl.test[cl.test_est1.train,] 
+Error in cl.test[cl.test_est1.train, ] : incorrect number of dimensions
+> cl.test_est1.change<-cl.test[cl.test_est1.train]
+> cl.clusters
+Error: object 'cl.clusters' not found
+> cl.test_est1
+[1] 2 2 1 1 1 1 2 1 1
+Levels: 1 2
+> cl.test[cl.test_est1.train]+1
+[1] 2 2
+> cl.test[cl.test_est1.train] +1
+[1] 2 2
+> cl.test[cl.test_est1.train] +2
+[1] 3 3
+> cl.test[cl.test_est1.train]
+[1] 1 1
+> cl.test_est1.train
+[1] 3 4
+> cl.test[cl.test_est1.train]<-ifelse(cl.test[cl.test_est1.train]==1, 2, 1)
+> cl.test[cl.test_est1.train]
+[1] 2 2
+> cl.test_est1
+[1] 2 2 1 1 1 1 2 1 1
+Levels: 1 2
+> cl.test_est1<-cl.test
+> cl.test_est1
+[1] 2 2 2 2 1 1 1 1 1
+> cl.test[cl.test_est1.train]<-ifelse(cl.test[cl.test_est1.train]==1, 2, 1)
+> sum(cl.test_est1!=cl.test)/n.test
+[1] 0.2222222
+> idx1<-idx.test[cl.test_est1!=cl.test]
+> plot(xy,col=ifelse(cl.res==1,"blue","green"))
+Error in ifelse(cl.res == 1, "blue", "green") : object 'cl.res' not found
+> plot(xy,col=ifelse(cl&clusters==1,"blue","green"))
+Error in ifelse(cl & clusters == 1, "blue", "green") : 
+  object 'clusters' not found
+> plot(xy,col=ifelse(cl$cluster==1,"blue","green"))
+> legend("topleft",legend=c("1","2"),fill=c("blue","green"))
+> points(xy[idx1,],col="red")
+> points(xy[idx.train[idx.new],],pch=3) 
+> idx.new
+[1]  3  9 12 13 14
+> idx.new.rand<-sample(1:n,cl.train)
+> idx.new.rand
+[1] 21
+> idx.new.rand<-sample(1:21,cl.train)
+> idx.new.rand
+[1] 7
+> idx.new.rand<-sample(1:n,n/5) 
+> idx.new.rand
+[1]  6 21 19 13 30 25
+> idx.new
+[1]  3  9 12 13 14
+> idx.new<-idx.new.rand
+> plot(xy,col=ifelse(cl$cluster==1,"blue","green"))
+> legend("topleft",legend=c("1","2"),fill=c("blue","green"))
+> points(xy[idx1,],col="red")
+> points(xy[idx.train[idx.new],],pch=3) 
+> cl.train
+ [1] 1 2 1 2 1 1 1 1 1 1 1 2 1 2 1 1 1 2 2 1 2
+> cl.train1<-ifelse(cl.train[idx.new]==1, 2, 1)
+> cl,train1
+Error: unexpected ',' in "cl,"
+> cl.train1
+[1]  2  1  1  2 NA NA
+> idx.new.rand
+[1]  6 21 19 13 30 25
+> n<-21
+> idx.new<-sample(1:n,cl.train)
+> idx.new
+[1] 21
+> idx.new<-sample(1:n,n/5)
+> idx.new
+[1]  5 20  6 18
+> cl.train1<-cl.train
+> cl.train1<-ifelse(cl.train1[idx.new]==1, 2, 1)
+> cl.train
+ [1] 1 2 1 2 1 1 1 1 1 1 1 2 1 2 1 1 1 2 2 1 2
+> cl.train1
+[1] 2 2 2 1
+> cl.train1<-cl.train
+> cl.train1[idx.new]<-ifelse(cl.train1[idx.new]==1, 2, 1)
+> cl.train
+ [1] 1 2 1 2 1 1 1 1 1 1 1 2 1 2 1 1 1 2 2 1 2
+> cl.train1
+ [1] 1 2 1 2 2 2 1 1 1 1 1 2 1 2 1 1 1 1 2 2 2
+> sum(cl.test_est1!=cl.test)/n.test
+[1] 0.2222222
+> idx1<-idx.test[cl.test_est1!=cl.test]
+> plot(xy,col=ifelse(cl$cluster==1,"blue","green"))
+> cl.trololo<-c(cl.train1, cl.test_est1)
+> plot(xy,col=ifelse(cl.trololo==1,"blue","green"))
+> idx1
+[1] 14 15
+> cl
+K-means clustering with 2 clusters of sizes 9, 21
+
+Cluster means:
+         V1         V2
+1 9.4514369 11.0463235
+2 0.5374199 -0.2540443
+
+Clustering vector:
+ [1] 1 1 1 1 2 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+
+Within cluster sum of squares by cluster:
+[1]  81.64395 397.10055
+ (between_SS / total_SS =  73.2 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      
+> cl&cluster
+Error: object 'cluster' not found
+> cl$cluster
+ [1] 1 1 1 1 2 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+> cl1<-cl
+> cl1&cluster
+Error: object 'cluster' not found
+> cl1&cluster
+Error: object 'cluster' not found
+> cl1
+K-means clustering with 2 clusters of sizes 9, 21
+
+Cluster means:
+         V1         V2
+1 9.4514369 11.0463235
+2 0.5374199 -0.2540443
+
+Clustering vector:
+ [1] 1 1 1 1 2 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+
+Within cluster sum of squares by cluster:
+[1]  81.64395 397.10055
+ (between_SS / total_SS =  73.2 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      
+> cl1&cluster
+Error: object 'cluster' not found
+> cl&cluster
+Error: object 'cluster' not found
+> cl1$cluster
+ [1] 1 1 1 1 2 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+> n<-30
+> idx.new<-sample(1:n, n/5)
+> idx.new
+[1]  9  5  7 14 23 25
+> cl1$cluster[idx.new]<-ifelse(cl1$cluster[idx.new]==1, 2, 1)
+> cl1$cluster
+ [1] 1 1 1 1 1 1 2 1 2 1 2 2 2 1 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2 2
+> plot(xy,col=ifelse(cl1$cluster==1,"blue","green"))
+> legend("topleft",legend=c("1","2"),fill=c("blue","green"))
+> points(xy[idx1,],col="red")
+> points(xy[idx.train[idx.new],],pch=3)

@@ -1,0 +1,18 @@
+#define IDR_MENU 10000
+#define IDM_CHFILE 10003
+#define IDM_EXIT 10001
+#define IDM_COLOR 10002
+#define IDM_MOVE 10004
+IDR_MENU MENUEX
+BEGIN
+  POPUP "&File"
+  BEGIN
+    MENUITEM "&Choose file",IDM_CHFILE
+    MENUITEM "E&xit",IDM_EXIT
+  END
+  POPUP "&Tools"
+  BEGIN
+    MENUITEM "Choose co&lor",IDM_COLOR
+    MENUITEM "Choose symbol",IDM_MOVE
+  END
+END
