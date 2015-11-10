@@ -61,7 +61,7 @@ public class Task9 {
         try
         {
             // Считывание
-            Scanner scanner = new Scanner(new File("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU-FAMCS\\2 course\\Java\\Univer\\src\\input.txt"));
+            Scanner scanner = new Scanner(new File("C:\\Users\\Дмитрий\\Документы\\GitHub\\input.txt"));
             if (!scanner.hasNext())
                 throw new IllegalArgumentException("Введите данные!");
 
