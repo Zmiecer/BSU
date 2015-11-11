@@ -41,7 +41,7 @@ public class Task9 {
         return B;
     }
 
-    public static void arrout(double[][] A, int deg)
+    public static void arrOut(double[][] A, int deg)
     {
         int n = A[0].length;
 
@@ -61,7 +61,8 @@ public class Task9 {
         try
         {
             // Считывание
-            Scanner scanner = new Scanner(new File("C:\\Users\\Дмитрий\\Документы\\GitHub\\input.txt"));
+            Scanner scanner = new Scanner(new FileReader("input.txt"));
+
             if (!scanner.hasNext())
                 throw new IllegalArgumentException("Введите данные!");
 
@@ -87,7 +88,7 @@ public class Task9 {
                 {
                     if (!scanner.hasNext())
                         throw new IllegalArgumentException("Матрица не квадратная!");
-                    A[i][j] = scanner.nextInt();
+                    A[i][j] = scanner.nextDouble();
                 }
             }
 
@@ -95,19 +96,19 @@ public class Task9 {
             A = power(A, deg);
 
             // Вывод
-            arrout(A, deg);
+            arrOut(A, deg);
 
         }
-        catch (FileNotFoundException fnfe)
+        catch (FileNotFoundException e)
         {
             System.out.println("File not found!");
         }
-        catch (IllegalArgumentException iae)
+        catch (IllegalArgumentException e)
         {
-            if (iae.getMessage().equals("N"))
+            if (e.getMessage().equals("N"))
                 System.out.println("Введите натуральный размер матрицы!");
             else
-                System.out.println(iae.getMessage());
+                System.out.println(e.getMessage());
         }
     }
 }
