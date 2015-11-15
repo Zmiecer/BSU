@@ -7,25 +7,25 @@ import java.util.*;
 
 public class Task9 {
 
-    public static double[][] power(double[][] A, int deg)
+    public static double[][] power(double[][] a, int deg)
     {
-        int n = A[0].length;
-        double P[][] = new double[n][n];
-        double B[][] = A;
+        int n = a[0].length;
+        double p[][] = new double[n][n];
+        double b[][] = a;
 
-        double N[][] = new double[n][n];
+        double e[][] = new double[n][n];
 
         if (deg > 0) {
             while (deg > 1) {
                 for (int i = 0; i < n; i++) {
                     for (int j = 0; j < n; j++) {
                         for (int k = 0; k < n; k++) {
-                            P[i][j] += B[i][k] * A[k][j];
+                            p[i][j] += b[i][k] * a[k][j];
                         }
                     }
                 }
-                B = P;
-                P = N;
+                b = p;
+                p = e;
                 deg--;
             }
         }
@@ -33,24 +33,24 @@ public class Task9 {
             if (deg == 0)
             {
                 for (int i = 0; i < n; i++)
-                    N[i][i] = 1;
-                return N;
+                    e[i][i] = 1;
+                return e;
             }
 
 
-        return B;
+        return b;
     }
 
-    public static void arrOut(double[][] A, int deg)
+    public static void arrOut(double[][] a, int deg)
     {
-        int n = A[0].length;
+        int n = a[0].length;
 
         System.out.println("Матрица A в степени " + deg + ": ");
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                System.out.print(A[i][j] + " ");
+                System.out.print(a[i][j] + " ");
             }
             System.out.println();
         }
