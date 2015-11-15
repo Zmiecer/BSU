@@ -109,7 +109,7 @@ public class Tree<T extends Comparable>
         tree.add(-3);
         tree.add(-2);
         tree.add(3);
-
+        
         tree.lcrtraversal();
         System.out.println();
         tree.lrctraversal();
