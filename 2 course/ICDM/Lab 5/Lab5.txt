@@ -1,4 +1,4 @@
-plot(dat,type="p",main="Диаграмма рассеяния",xlab="X", ylab="Y")
+plot(dat,type="p",main="Р”РёР°РіСЂР°РјРјР° СЂР°СЃСЃРµСЏРЅРёСЏ",xlab="X", ylab="Y")
 cl<-kmeans(dat,2)
 table(cl$cluster)
 table(cl$cluster)
