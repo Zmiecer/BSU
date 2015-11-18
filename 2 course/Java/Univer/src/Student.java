@@ -27,13 +27,7 @@ public class Student implements Comparable<Student>
     @Override
     public int compareTo(Student otherStudent)
     {
-        if(name.compareTo(otherStudent.name) > 0)
-            return 1;
-        else
-            if(name.compareTo(otherStudent.name) == 0)
-                return 0;
-        else
-            return -1;
+        return name.compareTo(otherStudent.name);
     }
 
     @Override

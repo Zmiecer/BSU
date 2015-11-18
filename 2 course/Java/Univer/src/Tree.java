@@ -59,42 +59,42 @@ public class Tree<T extends Comparable>
         }
     }
 
-    public void lcrtraversal()
+    public void lcrTraversal()
     {
-        lcrtraversal(root);
+        lcrTraversal(root);
     }
-    private void lcrtraversal(Node<T> node) {
+    private void lcrTraversal(Node<T> node) {
         if(node != null)
         {
-            lcrtraversal(node.left);
+            lcrTraversal(node.left);
             System.out.println(node.inf + " ");
-            lcrtraversal(node.right);
+            lcrTraversal(node.right);
         }
     }
 
-    public void lrctraversal()
+    public void lrcTraversal()
     {
-        lrctraversal(root);
+        lrcTraversal(root);
     }
-    private void lrctraversal(Node<T> node) {
+    private void lrcTraversal(Node<T> node) {
         if(node != null)
         {
-            lrctraversal(node.left);
-            lrctraversal(node.right);
+            lrcTraversal(node.left);
+            lrcTraversal(node.right);
             System.out.println(node.inf + " ");
         }
     }
 
-    public void clrtraversal()
+    public void clrTraversal()
     {
-        clrtraversal(root);
+        clrTraversal(root);
     }
-    private void clrtraversal(Node<T> node) {
+    private void clrTraversal(Node<T> node) {
         if(node != null)
         {
             System.out.println(node.inf + " ");
-            clrtraversal(node.left);
-            clrtraversal(node.right);
+            clrTraversal(node.left);
+            clrTraversal(node.right);
         }
     }
 
@@ -108,7 +108,6 @@ public class Tree<T extends Comparable>
         {
             if (node.inf.compareTo(t) == 0)
             {
-                System.out.println("Student found!");
                 return true;
             }
             else if (node.inf.compareTo(t) > 0)
@@ -118,7 +117,6 @@ public class Tree<T extends Comparable>
         }
         else
         {
-            System.out.println("Student not found.");
             return false;
         }
     }
@@ -136,11 +134,11 @@ public class Tree<T extends Comparable>
         integerTree.add(6);
         integerTree.add(5);
 
-        integerTree.lcrtraversal();
+        integerTree.lcrTraversal();
         System.out.println();
-        integerTree.lrctraversal();
+        integerTree.lrcTraversal();
         System.out.println();
-        integerTree.clrtraversal();
+        integerTree.clrTraversal();
 
 
         double d = 1.3;
@@ -153,11 +151,11 @@ public class Tree<T extends Comparable>
         doubleTree.add(1.7);
 
         System.out.println();
-        doubleTree.lcrtraversal();
+        doubleTree.lcrTraversal();
         System.out.println();
-        doubleTree.lrctraversal();
+        doubleTree.lrcTraversal();
         System.out.println();
-        doubleTree.clrtraversal();
+        doubleTree.clrTraversal();
 
 
 
@@ -172,17 +170,23 @@ public class Tree<T extends Comparable>
         studentTree.add(new Student("Varchenko", 21, 8.3));
 
         System.out.println();
-        studentTree.lcrtraversal();
+        studentTree.lcrTraversal();
         System.out.println();
-        studentTree.lrctraversal();
+        studentTree.lrcTraversal();
         System.out.println();
-        studentTree.clrtraversal();
+        studentTree.clrTraversal();
 
         System.out.println();
         Student bylinovich = new Student("Bylinovich", 19, 7.0);
-        Student demidko = new Student("Demidko", 18, 8.6);
-        studentTree.search(bylinovich);
-        studentTree.search(demidko);
+        Student demidko = new Student("Dorohovich", 18, 8.6);
+        if(studentTree.search(bylinovich))
+            System.out.println("Student found!");
+        else
+            System.out.println("Student not found.");
+        if(studentTree.search(demidko))
+            System.out.println("Student found!");
+        else
+            System.out.println("Student not found.");
 
 
     }
