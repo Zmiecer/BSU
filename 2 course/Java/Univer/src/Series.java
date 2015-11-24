@@ -32,9 +32,9 @@ public abstract class Series
     public String toString()
     {
         StringBuffer str = new StringBuffer();
-        for (int i = 0; i < length; i++)
+        for (int i = 1; i <= length; i++)
         {
-            str.append(getElem(i));
+            str.append(getElem(i) + " ");
         }
         return str.toString();
     }

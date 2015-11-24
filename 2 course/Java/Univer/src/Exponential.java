@@ -25,6 +25,6 @@ public class Exponential extends Series
     @Override
     public double sum()
     {
-        return super.sum();
+        return (elem*(1-Math.pow(delta, length)))/(1-delta);
     }
 }
