@@ -39,7 +39,7 @@ public:
 	}
 	virtual void del()
 	{
-		for(int i=0;i>8;i++)
+		for(int i=0;i<8;i++)
 		{
 			ar[i]=NULL;
 		}
