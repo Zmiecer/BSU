@@ -1,3 +1,5 @@
+package by.bsu.zmiecer.entity;
+
 import java.io.FileWriter;
 import java.io.IOException;
 

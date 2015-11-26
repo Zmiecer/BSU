@@ -1,3 +1,7 @@
+package by.bsu.zmiecer.view;
+
+import by.bsu.zmiecer.entity.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -8,7 +12,7 @@ import java.io.IOException;
 
 public class Frame extends JFrame
 {
-    public Frame (String s)
+    public Frame(String s)
     {
         super(s);
         JPanel panel = new JPanel();
@@ -86,28 +90,54 @@ public class Frame extends JFrame
         buttonOk.addActionListener(e -> {
             try {
                 if (editElem.getText().length() < 1) {
-                    throw new IllegalArgumentException("Введите основание!");
+                    throw new IllegalArgumentException("2");
                 }
                 if (editDelta.getText().length() < 1) {
-                    throw new IllegalArgumentException("Введите знаменатель!");
+                    throw new IllegalArgumentException("3");
                 }
                 if (editLength.getText().length() < 1) {
-                    throw new IllegalArgumentException("Введите длину!");
+                    throw new IllegalArgumentException("4");
                 }
                 double el = new Double(editElem.getText());
                 double del = new Double(editDelta.getText());
                 int len = new Integer(editLength.getText());
-                if (linButton.isSelected()) {
-                    Linear line = new Linear(el, del, len);
-                    labelOut.setText("<html>" + "Результат:   " + line.toString() + "  " + "</html>");
-                } else if (expButton.isSelected()) {
-                    Exponential exp = new Exponential(el, del, len);
-                    labelOut.setText("<html>" + "Результат:   " + exp.toString() + "  " + "</html>");
+
+                try {
+                    Series progr = null;
+                    if (linButton.isSelected()) {
+                        progr = new Linear(el, del, len);
+                    } else if (expButton.isSelected()) {
+                        progr = new Exponential(el, del, len);
+                    }
+                    labelOut.setText("<html>" + "Результат:   " + progr.toString() + "  " + "</html>");
+                } catch (NullPointerException ee) {
+                    labelOut.setText("Введите ненулевую длину!" + "  ");
                 }
 
 
             } catch (IllegalArgumentException ee) {
-                labelOut.setText("  " + ee.getMessage() + "  ");
+                switch (ee.getMessage()) {
+                    case ("1"): {
+                        labelOut.setText("Введите имя файла!" + "  ");
+                        break;
+                    }
+                    case ("2"): {
+                        labelOut.setText("Введите основание!" + "  ");
+                        break;
+                    }
+                    case ("3"): {
+                        labelOut.setText("Введите знаменатель!" + "  ");
+                        break;
+                    }
+                    case ("4"): {
+                        labelOut.setText("Введите длину!" + "  ");
+                        break;
+                    }
+                    default: {
+                        labelOut.setText("Введите нормальные данные, пожалуйста" + "  ");
+                        break;
+                    }
+                }
             }
         });
 
@@ -120,27 +150,52 @@ public class Frame extends JFrame
         {
             try {
                 if (editFile.getText().length() < 1) {
-                    throw new IllegalArgumentException("Введите имя файла!");
+                    throw new IllegalArgumentException("1");
+                }
+                if (editElem.getText().length() < 1) {
+                    throw new IllegalArgumentException("2");
+                }
+                if (editDelta.getText().length() < 1) {
+                    throw new IllegalArgumentException("3");
+                }
+                if (editLength.getText().length() < 1) {
+                    throw new IllegalArgumentException("4");
                 }
                 double el = new Double(editElem.getText());
                 double del = new Double(editDelta.getText());
-                if (linButton.isSelected())
-                {
-                    Linear line = new Linear(el, del, 10);
+                int len = new Integer(editLength.getText());
+                if (linButton.isSelected()) {
+                    Linear line = new Linear(el, del, len);
                     line.write(editFile.getText() + ".txt");
-                }
-                else if (expButton.isSelected())
-                {
-                    Exponential exp = new Exponential(el, del, 10);
+                } else if (expButton.isSelected()) {
+                    Exponential exp = new Exponential(el, del, len);
                     exp.write(editFile.getText() + ".txt");
                 }
-            }
-            catch (IllegalArgumentException ee) {
-                labelOut.setText("  " + ee.getMessage() + "  ");
-            }
-            catch (IOException ee)
-            {
-                labelOut.setText("  " + "Invalid file name!" + "  ");
+            } catch (IllegalArgumentException ee) {
+                switch (ee.getMessage()) {
+                    case ("1"): {
+                        labelOut.setText("Введите имя файла!" + "  ");
+                        break;
+                    }
+                    case ("2"): {
+                        labelOut.setText("Введите основание!" + "  ");
+                        break;
+                    }
+                    case ("3"): {
+                        labelOut.setText("Введите знаменатель!" + "  ");
+                        break;
+                    }
+                    case ("4"): {
+                        labelOut.setText("Введите длину!" + "  ");
+                        break;
+                    }
+                    default: {
+                        labelOut.setText("Введите нормальные данные, пожалуйста" + "  ");
+                        break;
+                    }
+                }
+            } catch (IOException ee) {
+                labelOut.setText("Неверное имя файла!" + "  ");
             }
         });
 
@@ -149,8 +204,5 @@ public class Frame extends JFrame
         setVisible(true);
 
 
-    }
-    public static void main(String[] args) {
-        Frame frame = new Frame("Прогрессии");
     }
 }
