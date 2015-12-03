@@ -22,28 +22,32 @@ public class MyCollection <T extends Comparable <T>> extends ArrayList <T>
         for(Iterator<T> iter = this.iterator(); iter.hasNext();)
             if (iter.hasNext() && min.compareTo(iter.next()) < 0)
                 min = iter.next();
-        return min;
+        //return min;
+
+        return (T)Collections.min(this);
     }
 
     public T maximum()
     {
-        return Collections.max(this);
+
+        return (T)Collections.max(this);
     }
 
     public MyCollection<T> sort()
     {
-        MyCollection<T> temp;
-        temp = new MyCollection<>(this.clone());
-        return sort();
+        MyCollection<T> temp = (MyCollection<T>) (this.clone());
+        Collections.sort(temp);
+        return temp;
     }
 
     public static void main(String[] args) {
         MyCollection<Student> test = new MyCollection<>();
-        test.add(new Student("Bylinovich", 18, 7.0));
+
         test.add(new Student("Zvedosovich", 18, 7.0));
+        test.add(new Student("Bylinovich", 19, 7.0));
 
         MyCollection<Student> test2 = new MyCollection<>();
-        test2 = test.sort();
+        test.sort();
         System.out.println(test.minimum());
      }
 }
