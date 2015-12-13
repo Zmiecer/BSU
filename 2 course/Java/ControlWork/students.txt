@@ -1,0 +1,6 @@
+Bylinovich BSU 7,0 2
+Bykinevich BSU 7,5 2
+Samoilenko MPGU 6,5 3
+Fedorenko BNTU 9,0 1
+Avizhen BSU 9,0 2
+Torvjard Algoord 5,7 5
