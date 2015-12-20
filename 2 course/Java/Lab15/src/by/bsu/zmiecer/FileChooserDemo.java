@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 
 public class FileChooserDemo extends JPanel implements ActionListener
 {
-    JButton openButton, saveButton;
+    JButton openButton, addButton;
     JFileChooser fc;
     File file = null;
     JTable table = null;
@@ -34,15 +34,15 @@ public class FileChooserDemo extends JPanel implements ActionListener
         openButton = new JButton("Open a File...");
         openButton.addActionListener(this);
 
-        saveButton = new JButton("Add an item");
-        saveButton.addActionListener(e ->
+        addButton = new JButton("Add an item");
+        addButton.addActionListener(e ->
         {
-            
+
         });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(openButton);
-        buttonPanel.add(saveButton);
+        buttonPanel.add(addButton);
         add(buttonPanel, BorderLayout.PAGE_START);
 
     }
@@ -74,13 +74,16 @@ public class FileChooserDemo extends JPanel implements ActionListener
                 students = students.sort();
 
                 Object [][] data = new Object[students.size()][5];
-                for (int i = 0; i < students.size(); i++) {
-                    data[i][0] = students.get(i).getNumber();
-                    data[i][1] = students.get(i).getSurname();
-                    data[i][2] = students.get(i).getCourse();
-                    data[i][3] = students.get(i).getGroup();
-                }
 
+
+                int i = 0;
+                for (Student student : students) {
+                    data[i][0] = student.getNumber();
+                    data[i][1] = student.getSurname();
+                    data[i][2] = student.getCourse();
+                    data[i][3] = student.getGroup();
+                    i++;
+                }
 
                 table = new JTable(data, columnNames);
                 this.removeAll();
@@ -89,7 +92,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
 
                 JPanel buttonPanel = new JPanel();
                 buttonPanel.add(openButton);
-                buttonPanel.add(saveButton);
+                buttonPanel.add(addButton);
                 add(buttonPanel, BorderLayout.PAGE_START);
                 revalidate();
 
@@ -139,7 +142,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
         }
         finally
         {
-            System.out.println("Interface exception!");
+
         }
         SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
