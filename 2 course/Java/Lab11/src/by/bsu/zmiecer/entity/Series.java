@@ -30,16 +30,16 @@ public abstract class Series
         return s;
     }
 
-    @Override
-    public String toString()
-    {
-        StringBuffer str = new StringBuffer();
-        for (int i = 1; i <= length; i++)
+        @Override
+        public String toString()
         {
-            str.append(getElem(i) + " ");
+            StringBuffer str = new StringBuffer();
+            for (int i = 1; i <= length; i++)
+            {
+                str.append(getElem(i) + " ");
+            }
+            return str.toString();
         }
-        return str.toString();
-    }
 
     public void saveEl(int k)
     {
