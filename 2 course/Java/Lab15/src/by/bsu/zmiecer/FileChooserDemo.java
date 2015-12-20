@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Created by Zmiecer on 20.12.2015.
@@ -29,7 +30,10 @@ public class FileChooserDemo extends JPanel implements ActionListener
     public FileChooserDemo() {
         super(new BorderLayout());
 
-        fc = new JFileChooser();
+        fc = new JFileChooser("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Java\\Lab15\\students");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Text Files", "txt");
+        fc.setFileFilter(filter);
 
         openButton = new JButton("Open a File...");
         openButton.addActionListener(this);
@@ -87,10 +91,12 @@ public class FileChooserDemo extends JPanel implements ActionListener
             dialogPanel.add(fieldGroup);
             dialogPanel.add(buttonDialogPanel);
 
-            dialog.setBounds(150,150,200,350);
+            dialog.setBounds(150, 150, 200, 350);
 
             dialog.setContentPane(dialogPanel);
             dialog.setVisible(true);
+
+            dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         });
 
         JPanel buttonPanel = new JPanel();
