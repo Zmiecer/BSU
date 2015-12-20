@@ -1,0 +1,5 @@
+1121000 Dorohovich 2 4
+1234300 Nevyazov 2 1
+1234220 Shipko 1 5
+1111000 Nehvedov 3 2
+1134567 Vrungel 6 22

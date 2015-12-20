@@ -84,12 +84,15 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
                 lines.clear();
                 while(sc.hasNextLine())
                 {
-                    startX = sc.nextInt();
-                    startY = sc.nextInt();
-                    endX = sc.nextInt();
-                    endY = sc.nextInt();
-                    color = new Color(sc.nextInt(), sc.nextInt(), sc.nextInt());
-                    lines.add(new Line(startX, startY, endX, endY, color));
+                    if(sc.hasNext()) {
+                        startX = sc.nextInt();
+                        startY = sc.nextInt();
+                        endX = sc.nextInt();
+                        endY = sc.nextInt();
+                        color = new Color(sc.nextInt(), sc.nextInt(), sc.nextInt());
+                        lines.add(new Line(startX, startY, endX, endY, color));
+                    }
+                    else break;
                 }
                 repaint();
                 sc.close();
