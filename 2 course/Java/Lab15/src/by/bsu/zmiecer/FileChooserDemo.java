@@ -57,7 +57,8 @@ public class FileChooserDemo extends JPanel implements ActionListener
             buttonOk.addActionListener(ee ->
             {
                 try {
-                    students.add(new Student(Integer.parseInt(fieldNumber.getText()),
+                    students.add(new Student(
+                            Integer.parseInt(fieldNumber.getText()),
                             fieldSurname.getText(),
                             Integer.parseInt(fieldCourse.getText()),
                             Integer.parseInt(fieldGroup.getText())));
