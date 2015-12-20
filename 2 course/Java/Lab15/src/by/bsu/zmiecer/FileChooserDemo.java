@@ -1,6 +1,5 @@
 package by.bsu.zmiecer;
 
-
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,18 +8,17 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.*;
 
 /**
  * Created by Zmiecer on 20.12.2015.
  */
 
-public class FileChooserDemo extends JPanel
-        implements ActionListener {
+public class FileChooserDemo extends JPanel implements ActionListener
+{
     JButton openButton, saveButton;
     JFileChooser fc;
     File file = null;
-
+    JTable table = null;
 
     StudentCollection<Student> students = new StudentCollection<>();
     final String[] columnNames = {"Number",
@@ -36,92 +34,81 @@ public class FileChooserDemo extends JPanel
         openButton = new JButton("Open a File...");
         openButton.addActionListener(this);
 
-        saveButton = new JButton("Save a File...");
-        saveButton.addActionListener(this);
+        saveButton = new JButton("Add an item");
+        saveButton.addActionListener(e ->
+        {
+            
+        });
 
-        //For layout purposes, put the buttons in a separate panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(openButton);
         buttonPanel.add(saveButton);
-
-        //Add the buttons and the log to this panel.
         add(buttonPanel, BorderLayout.PAGE_START);
 
-        updateUI();
-
     }
 
+    public void actionPerformed(ActionEvent e)
+    {
+        int returnVal = fc.showOpenDialog(FileChooserDemo.this);
 
-    @Override
-    public void updateUI() {
-        super.updateUI();
-        try
+        if (returnVal == JFileChooser.APPROVE_OPTION)
         {
-            students.clear();
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine())
+            file = fc.getSelectedFile();
+            try
             {
-                if(scanner.hasNext()) {
-                    int number = scanner.nextInt();
-                    String surname = scanner.next();
-                    int course = scanner.nextInt();
-                    int group = scanner.nextInt();
-                    Student student = new Student(number, surname, course, group);
-                    students.add(student);
+                students.clear();
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine())
+                {
+                    if(scanner.hasNext()) {
+                        int number = scanner.nextInt();
+                        String surname = scanner.next();
+                        int course = scanner.nextInt();
+                        int group = scanner.nextInt();
+                        Student student = new Student(number, surname, course, group);
+                        students.add(student);
+                    }
+                    else
+                        break;
                 }
-                else
-                    break;
+                students = students.sort();
+
+                Object [][] data = new Object[students.size()][5];
+                for (int i = 0; i < students.size(); i++) {
+                    data[i][0] = students.get(i).getNumber();
+                    data[i][1] = students.get(i).getSurname();
+                    data[i][2] = students.get(i).getCourse();
+                    data[i][3] = students.get(i).getGroup();
+                }
+
+
+                table = new JTable(data, columnNames);
+                this.removeAll();
+                JScrollPane scrollpane = new JScrollPane(table);
+                add(scrollpane, BorderLayout.CENTER);
+
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.add(openButton);
+                buttonPanel.add(saveButton);
+                add(buttonPanel, BorderLayout.PAGE_START);
+                revalidate();
+
             }
-            students = students.sort();
-
-            Object [][] data = new Object[students.size()][5];
-            for (int i = 0; i < students.size(); i++) {
-                data[i][0] = students.get(i).getNumber();
-                data[i][1] = students.get(i).getSurname();
-                data[i][2] = students.get(i).getCourse();
-                data[i][3] = students.get(i).getGroup();
+            catch (FileNotFoundException ex)
+            {
+                System.out.println("File not found!");
             }
-
-
-            JTable table = new JTable(data, columnNames);
-
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("File not found!");
-        }
-        catch (InputMismatchException e)
-        {
-            System.out.println("Please, enter correct data!");
-        }
-        catch (NoSuchElementException e)
-        {
-            System.out.println("No such element exception!");
-        }
-        catch (NullPointerException e)
-        {
-            System.out.println();
-        }
-
-
-    }
-
-    public void actionPerformed(ActionEvent e) {
-
-        //Handle open button action.
-        if (e.getSource() == openButton) {
-            int returnVal = fc.showOpenDialog(FileChooserDemo.this);
-
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                file = fc.getSelectedFile();
-                updateUI();
+            catch (InputMismatchException ex)
+            {
+                System.out.println("Please, enter correct data!");
             }
-        }
-        //Handle save button action.
-        else if (e.getSource() == saveButton) {
-            int returnVal = fc.showSaveDialog(FileChooserDemo.this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                file = fc.getSelectedFile();
+            catch (NoSuchElementException ex)
+            {
+                System.out.println("No such element exception!");
+            }
+            catch (NullPointerException ex)
+            {
+                System.out.println("Null pointer exception!");
             }
         }
     }
@@ -147,7 +134,13 @@ public class FileChooserDemo extends JPanel
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
 
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        }
+        finally
+        {
+            System.out.println("Interface exception!");
+        }
         SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
 }
