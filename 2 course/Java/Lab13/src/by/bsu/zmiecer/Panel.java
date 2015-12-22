@@ -63,26 +63,12 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         downPanel.add(redButton);
         downPanel.add(saveButton);
         downPanel.add(openButton);
+        
 
-        JTextField fileName = new JTextField();
-        fileName.setBounds(0,0,200,50);
-        downPanel.add(fileName);
-
-        JFileChooser fc = new JFileChooser("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Java\\Lab13");
+        JFileChooser fc = new JFileChooser("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Java\\Lab13\\pictures");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Text Files", "txt");
         fc.setFileFilter(filter);
-
-
-
-
-        /*
-        this.add(blackButton);
-        this.add(blueButton);
-        this.add(redButton);
-        this.add(saveButton);
-        this.add(openButton);
-        */
 
 
 
