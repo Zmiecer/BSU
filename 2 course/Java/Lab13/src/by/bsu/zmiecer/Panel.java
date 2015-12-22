@@ -1,6 +1,9 @@
 package by.bsu.zmiecer;
 
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -24,6 +27,7 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
     boolean lineStarted = false;
     boolean mouseExited = false;
 
+
     ArrayList<Line> lines = new ArrayList<>();
 
     JToggleButton blackButton = new JToggleButton("Black");
@@ -31,10 +35,10 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
     JToggleButton redButton = new JToggleButton("Red");
 
 
+    JPanel downPanel = new JPanel();
+
     protected void init()
     {
-
-
 
         JButton saveButton = new JButton("Save");
         JButton openButton = new JButton("Open");
@@ -52,24 +56,54 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         openButton.setBounds(0, 200, 100, 50);
 
 
+
+
+        downPanel.add(blackButton);
+        downPanel.add(blueButton);
+        downPanel.add(redButton);
+        downPanel.add(saveButton);
+        downPanel.add(openButton);
+
+        JTextField fileName = new JTextField();
+        fileName.setBounds(0,0,200,50);
+        downPanel.add(fileName);
+
+        JFileChooser fc = new JFileChooser("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Java\\Lab13");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Text Files", "txt");
+        fc.setFileFilter(filter);
+
+
+
+
+        /*
         this.add(blackButton);
         this.add(blueButton);
         this.add(redButton);
         this.add(saveButton);
         this.add(openButton);
+        */
+
+
+
 
         blackButton.setSelected(true);
 
         saveButton.addActionListener(e -> {
             try
             {
-                FileWriter file = new FileWriter("out.txt");
-                for (int i = 0; i < lines.size(); i++)
-                {
-                    file.write(lines.get(i).toString());
-                    file.write("\n");
+                int returnVal = fc.showSaveDialog(Panel.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File fileSave = fc.getSelectedFile();
+
+                    FileWriter file = new FileWriter(fileSave);
+                    for (int i = 0; i < lines.size(); i++) {
+                        file.write(lines.get(i).toString());
+                        file.write("\n");
+                    }
+                    file.close();
                 }
-                file.close();
             }
             catch (IOException ex)
             {
@@ -80,7 +114,14 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         openButton.addActionListener(e -> {
             try
             {
-                Scanner sc = new Scanner(new File("out.txt"));
+                int returnVal = fc.showOpenDialog(Panel.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION)
+                {
+                    File fileOpen = fc.getSelectedFile();
+
+
+                Scanner sc = new Scanner(fileOpen);
                 lines.clear();
                 while(sc.hasNextLine())
                 {
@@ -96,6 +137,7 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
                 }
                 repaint();
                 sc.close();
+                }
             }
             catch (IOException ex)
             {
@@ -197,5 +239,34 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
     public void mouseMoved(MouseEvent e)
     {
 
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Рисование");
+        frame.setBounds(100,100,640,480);
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new BorderLayout());
+
+        Panel drawPanel = new Panel();
+        drawPanel.init();
+        drawPanel.repaint();
+        drawPanel.setOpaque(true);
+        drawPanel.setLayout(null);
+        drawPanel.setPreferredSize(new Dimension(1000, 600));
+        JScrollPane scrollPaintPanel = new JScrollPane(drawPanel);
+        scrollPaintPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPaintPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        contentPane.add(scrollPaintPanel, BorderLayout.CENTER);
+
+
+
+        contentPane.add(drawPanel.downPanel, BorderLayout.SOUTH);
+
+
+
+
+        frame.setContentPane(contentPane);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }

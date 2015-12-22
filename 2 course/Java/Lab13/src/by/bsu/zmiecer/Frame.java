@@ -21,6 +21,7 @@ public class Frame extends JFrame
 
 
 
+
         panel.init();
         panel.repaint();
 
