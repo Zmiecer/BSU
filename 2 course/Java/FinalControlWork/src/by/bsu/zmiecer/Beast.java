@@ -17,7 +17,13 @@ public class Beast implements Comparable<Beast> {
 
     @Override
     public int compareTo(Beast otherBeast) {
-        return name.compareTo(otherBeast.name);
+        if(!habitat.equals(otherBeast.habitat))
+            return habitat.compareTo(otherBeast.habitat);
+        else
+        if(!name.equals(otherBeast.name))
+            return name.compareTo(otherBeast.name);
+        else
+            return otherBeast.foodPerDay - foodPerDay;
     }
 
     @Override

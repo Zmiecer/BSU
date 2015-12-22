@@ -3,9 +3,7 @@ package by.bsu.zmiecer;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,7 +19,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
     File file = null;
     JTable table = null;
 
-    StudentCollection<Student> students = new StudentCollection<>();
+    ArrayList<Student> students = new ArrayList<>();
     final String[] columnNames = {"Number",
             "Surname",
             "Course",
@@ -124,7 +122,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
                 }
             }
 
-            students = students.sort();
+            Collections.sort(students);
 
             Object [][] data = new Object[students.size()][5];
 
