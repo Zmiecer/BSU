@@ -41,4 +41,15 @@ public abstract class Pupil implements Comparable<Pupil> {
         return institution.equals(pupil.institution);
 
     }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = surname.hashCode();
+        result = 31 * result + institution.hashCode();
+        temp = Double.doubleToLongBits(gpa);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
