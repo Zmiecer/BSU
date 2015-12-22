@@ -3,7 +3,7 @@ package by.bsu.zmiecer;
 /**
  * Created by Zmiecer on 22.12.2015.
  */
-public class Beast implements Comparable<Beast> {
+public abstract class Beast implements Comparable<Beast> {
 
     String name;
     String habitat;
@@ -33,9 +33,7 @@ public class Beast implements Comparable<Beast> {
 
         Beast beast = (Beast) o;
 
-        if (foodPerDay != beast.foodPerDay) return false;
-        if (!name.equals(beast.name)) return false;
-        return habitat.equals(beast.habitat);
+        return foodPerDay == beast.foodPerDay && name.equals(beast.name) && habitat.equals(beast.habitat);
 
     }
 }
