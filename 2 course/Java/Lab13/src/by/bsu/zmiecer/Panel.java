@@ -61,8 +61,19 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         downPanel.add(blackButton);
         downPanel.add(blueButton);
         downPanel.add(redButton);
+
+
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(e->{
+            lines.clear();
+            repaint();
+        });
+        downPanel.add(clearButton);
+
+
         downPanel.add(saveButton);
         downPanel.add(openButton);
+
 
 
         JFileChooser fc = new JFileChooser("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Java\\Lab13\\pictures");
@@ -146,17 +157,6 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         setAutoscrolls(true);
 
 
-
-        if(lineStarted)
-        {
-            if(blackButton.isSelected())
-                color = Color.BLACK;
-            if(blueButton.isSelected())
-                color = Color.BLUE;
-            if(redButton.isSelected())
-                color = Color.RED;
-            lines.add(new Line(startX, startY, endX, endY, color));
-        }
         for (int i = 0; i < lines.size(); i++)
         {
             g.setColor(lines.get(i).getColor());
@@ -164,6 +164,8 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         }
         startX = endX;
         startY = endY;
+
+
     }
 
     @Override
@@ -219,6 +221,16 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
             lineStarted = true;
             repaint();
         }
+        if(lineStarted)
+        {
+            if(blackButton.isSelected())
+                color = Color.BLACK;
+            if(blueButton.isSelected())
+                color = Color.BLUE;
+            if(redButton.isSelected())
+                color = Color.RED;
+            lines.add(new Line(startX, startY, endX, endY, color));
+        }
     }
 
     @Override
@@ -227,7 +239,8 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         JFrame frame = new JFrame("Рисование");
         frame.setBounds(100,100,640,480);
         JPanel contentPane = new JPanel();
@@ -238,7 +251,7 @@ public class Panel extends JScrollPane implements MouseListener, MouseMotionList
         drawPanel.repaint();
         drawPanel.setOpaque(true);
         drawPanel.setLayout(null);
-        drawPanel.setPreferredSize(new Dimension(1000, 600));
+        drawPanel.setPreferredSize(new Dimension(1920, 1080));
         JScrollPane scrollPaintPanel = new JScrollPane(drawPanel);
         scrollPaintPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPaintPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

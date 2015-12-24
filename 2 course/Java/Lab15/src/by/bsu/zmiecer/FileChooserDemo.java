@@ -14,12 +14,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileChooserDemo extends JPanel implements ActionListener
 {
-    JButton openButton, addButton;
+    JButton openButton, addButton, groupButton, clearButton;
     JFileChooser fc;
     File file = null;
     JTable table = null;
+    int tempGroup = -1;
 
-    ArrayList<Student> students = new ArrayList<>();
+    StudentCollection students = new StudentCollection();
+    //ArrayList<Student> students = new ArrayList<>();
     final String[] columnNames = {"Number",
             "Surname",
             "Course",
@@ -28,7 +30,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
     public FileChooserDemo() {
         super(new BorderLayout());
 
-        fc = new JFileChooser("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Java\\Lab15\\students");
+        fc = new JFileChooser("students");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Text Files", "txt");
         fc.setFileFilter(filter);
@@ -46,11 +48,11 @@ public class FileChooserDemo extends JPanel implements ActionListener
             JLabel labelNumber = new JLabel(" Number");
             JTextField fieldNumber = new JTextField(10);
             JLabel labelSurname = new JLabel(" Surname");
-            JTextField fieldSurname = new JTextField(10);
+            JTextField fieldSurname = new JTextField(20);
             JLabel labelCourse = new JLabel(" Course");
-            JTextField fieldCourse = new JTextField(10);
+            JTextField fieldCourse = new JTextField(1);
             JLabel labelGroup = new JLabel(" Group");
-            JTextField fieldGroup = new JTextField(10);
+            JTextField fieldGroup = new JTextField(2);
 
             JPanel dialogPanel = new JPanel();
             dialogPanel.setLayout(new GridLayout(10, 1));
@@ -59,6 +61,8 @@ public class FileChooserDemo extends JPanel implements ActionListener
             buttonOk.addActionListener(ee ->
             {
                 try {
+                    if(fieldSurname.getText().equals(""))
+                        throw new NumberFormatException();
                     students.add(new Student(
                             Integer.parseInt(fieldNumber.getText()),
                             fieldSurname.getText(),
@@ -69,7 +73,8 @@ public class FileChooserDemo extends JPanel implements ActionListener
                 }
                 catch (NumberFormatException ex)
                 {
-                    System.out.println("Enter correct data!");
+                    JOptionPane.showMessageDialog(null, "Please, enter correct data!");
+                    //System.out.println("Please, enter correct data!");
                 }
             });
             JButton buttonCancel = new JButton("Cancel");
@@ -97,9 +102,68 @@ public class FileChooserDemo extends JPanel implements ActionListener
             dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         });
 
+        groupButton = new JButton("Group");
+        groupButton.addActionListener(e->
+        {
+            JDialog dialog = new JDialog();
+
+            dialog.setModal(true);
+
+            JLabel labelGroup = new JLabel(" Group");
+            JTextField fieldGroup = new JTextField(2);
+
+            JPanel dialogPanel = new JPanel();
+            dialogPanel.setLayout(new GridLayout(10, 1));
+
+            JButton buttonOk = new JButton("OK");
+            buttonOk.addActionListener(ee ->
+            {
+                try {
+                    tempGroup = Integer.parseInt(fieldGroup.getText());
+                    if (tempGroup <= 0)
+                        throw new NumberFormatException();
+                    update(false);
+                    dialog.setVisible(false);
+                }
+                catch (NumberFormatException ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Please, enter correct data!");
+                    //System.out.println("Please, enter correct data!");
+                }
+            });
+
+
+
+            JButton buttonCancel = new JButton("Cancel");
+            buttonCancel.addActionListener(ee -> dialog.setVisible(false));
+
+            JPanel buttonDialogPanel = new JPanel();
+            buttonDialogPanel.add(buttonOk);
+            buttonDialogPanel.add(buttonCancel);
+
+            dialogPanel.add(labelGroup);
+            dialogPanel.add(fieldGroup);
+            dialogPanel.add(buttonDialogPanel);
+
+            dialog.setBounds(150, 150, 200, 350);
+
+            dialog.setContentPane(dialogPanel);
+            dialog.setVisible(true);
+
+            dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        });
+
+        clearButton = new JButton("Clear");
+        clearButton.addActionListener(e->{
+            tempGroup = 0;
+            update(false);
+        });
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(openButton);
         buttonPanel.add(addButton);
+        buttonPanel.add(groupButton);
+        buttonPanel.add(clearButton);
         add(buttonPanel, BorderLayout.PAGE_START);
 
     }
@@ -122,13 +186,22 @@ public class FileChooserDemo extends JPanel implements ActionListener
                 }
             }
 
-            Collections.sort(students);
+            //Collections.sort(students);
+            students.sort();
+            StudentCollection tempStudents = new StudentCollection();
+            if (tempGroup > 0)
+                for (Student student:students) {
+                    if(tempGroup == student.getGroup())
+                     tempStudents.add(student);
+                }
+            else
+                tempStudents = students;
 
-            Object [][] data = new Object[students.size()][5];
+            Object [][] data = new Object[tempStudents.size()][5];
 
 
             int i = 0;
-            for (Student student : students) {
+            for (Student student : tempStudents) {
                 data[i][0] = student.getNumber();
                 data[i][1] = student.getSurname();
                 data[i][2] = student.getCourse();
@@ -137,6 +210,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
             }
 
             table = new JTable(data, columnNames);
+            table.setEnabled(false);
             this.removeAll();
             JScrollPane scrollpane = new JScrollPane(table);
             add(scrollpane, BorderLayout.CENTER);
@@ -144,25 +218,31 @@ public class FileChooserDemo extends JPanel implements ActionListener
             JPanel buttonPanel = new JPanel();
             buttonPanel.add(openButton);
             buttonPanel.add(addButton);
+            buttonPanel.add(groupButton);
+            buttonPanel.add(clearButton);
             add(buttonPanel, BorderLayout.PAGE_START);
             revalidate();
 
         }
         catch (FileNotFoundException ex)
         {
-            System.out.println("File not found!");
+            JOptionPane.showMessageDialog(null, "File not found!");
+            //System.out.println("File not found!");
         }
         catch (InputMismatchException ex)
         {
-            System.out.println("Please, enter correct data!");
+            JOptionPane.showMessageDialog(null, "Please, enter correct data!");
+            //System.out.println("Please, enter correct data!");
         }
         catch (NoSuchElementException ex)
         {
-            System.out.println("No such element exception!");
+            JOptionPane.showMessageDialog(null, "No such element exception!");
+            //System.out.println("No such element exception!");
         }
         catch (NullPointerException ex)
         {
-           System.out.println("Null pointer exception!");
+            JOptionPane.showMessageDialog(null, "Null pointer exception!");
+            //System.out.println("Null pointer exception!");
         }
     }
 

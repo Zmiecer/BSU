@@ -50,19 +50,17 @@ public class Cards implements MouseListener {
 
         buttonRight.addActionListener(e ->
         {
-            if(!listLeft.isSelectionEmpty()) {
+            while (!listLeft.isSelectionEmpty()) {
                 modelRight.add(modelRight.size(), listLeft.getSelectedValue());
                 modelLeft.remove(listLeft.getSelectedIndex());
-                listLeft.clearSelection();
             }
         });
 
         buttonLeft.addActionListener(e ->
         {
-            if (!listRight.isSelectionEmpty()) {
+            while (!listRight.isSelectionEmpty()) {
                 modelLeft.add(modelLeft.size(), listRight.getSelectedValue());
                 modelRight.remove(listRight.getSelectedIndex());
-                listRight.clearSelection();
             }
         });
 
@@ -223,22 +221,28 @@ public class Cards implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        tempButtonText = ((JButton)e.getComponent()).getText();
-        ((JButton)e.getComponent()).setText("Clicked!");
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            tempButtonText = ((JButton) e.getComponent()).getText();
+            ((JButton) e.getComponent()).setText("Clicked!");
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        ((JButton)e.getComponent()).setText(tempButtonText);
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            ((JButton) e.getComponent()).setText(tempButtonText);
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        //tempButtonText = ((JButton)e.getComponent()).getText();
         e.getComponent().setBackground(Color.red);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         e.getComponent().setBackground(Color.white);
+        //((JButton)e.getComponent()).setText(tempButtonText);
     }
 }
