@@ -1,3 +1,6 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define INT long long
+
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -9,36 +12,33 @@ using namespace std;
 
 ofstream fout("output.txt");
 
-void back(vector<unsigned int> arr, unsigned int n)
+void back(vector<INT> arr, INT n)
 {
-	stack<unsigned int> st1;
-	stack<unsigned int> st;
-	for (unsigned int i = 0; i < arr.size(); i++)
+	stack<INT> st;
+	INT max = arr[0];
+	for (INT i = 0; i < arr.size(); i++)
 	{
 		if (!st.empty())
-			if (arr[i] >= st.top())
+		{
+			if (arr[i] >= max)
 			{
-				int tmp = st.top();
-				st.pop();
-				while (!st.empty() && tmp <= arr[i] && tmp < st.top())
+				while (!st.empty() && st.top() < max)
 				{
-					//if (tmp < arr[0])
-					//	st1.push(tmp);
-					//else
-					{
-						fout << tmp << " ";
-					}
-					tmp = st.top();
+					fout << st.top() << " ";
 					st.pop();
 				}
-				st.push(tmp);
+				max = arr[i];
 			}
-		if (arr[i] > arr[0])
-			while (!st1.empty())
+			INT tmp = st.top();
+			st.pop();
+			while (!st.empty() && st.top() <= arr[i] && tmp < st.top() && tmp < arr[i])
 			{
-				fout << st1.top() << " ";
-				st1.pop();
+				fout << tmp << " ";
+				tmp = st.top();
+				st.pop();
 			}
+			st.push(tmp);
+		}
 		st.push(arr[i]);
 	}
 	while (!st.empty())
@@ -49,10 +49,10 @@ void back(vector<unsigned int> arr, unsigned int n)
 	fout << endl;
 }
 
-void inside(vector<unsigned int> arr, unsigned int n)
+void inside(vector<INT> arr, INT n)
 {
-	stack<unsigned int> st;
-	for (unsigned int i = 0; i < arr.size(); i++)
+	stack<INT> st;
+	for (INT i = 0; i < arr.size(); i++)
 	{
 		if (!st.empty())
 			if (arr[i] >= st.top())
@@ -77,19 +77,19 @@ void inside(vector<unsigned int> arr, unsigned int n)
 
 int main()
 {
-	unsigned int n;
+	INT n;
+	
 
 	ifstream fin("input.txt");
 	fin >> n;
 
-	vector<unsigned int> arr(n);
-	for (unsigned int i = 0; i < n; i++)
+	vector<INT> arr(n);
+	for (INT i = 0; i < n; i++)
 	{
 		fin >> arr[i];
 	}
 	fin.close();
 
-	
 
 	back(arr, n);
 	inside(arr, n);

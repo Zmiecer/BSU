@@ -14,7 +14,6 @@ public class Runner {
         integerTree.add(51);
         integerTree.add(73);
         integerTree.add(22);
-        integerTree.add(73);
         integerTree.add(27);
         integerTree.add(31);
         integerTree.add(81);
