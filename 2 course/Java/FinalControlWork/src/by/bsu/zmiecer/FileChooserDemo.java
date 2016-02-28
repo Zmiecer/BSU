@@ -23,7 +23,7 @@ public class FileChooserDemo extends JPanel implements ActionListener
     JTable table = null;
 
     ArrayList<Newspaper> newspapers = new ArrayList<>();
-    ArrayList<Magazine> magazines = new ArrayList<>();
+    //ArrayList<Magazine> magazines = new ArrayList<>();
 
     final String[] columnNames = {"Name",
             "Editor",

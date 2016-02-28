@@ -12,22 +12,40 @@ Matrix fillA(Matrix A, int alpha)
 	A[0][0] = 8;
 	A[0][1] = 4;
 	A[0][2] = 1;
-	A[0][3] = -1;
+	//A[0][3] = -1;
 	A[1][0] = 3;
 	A[1][1] = 5;
 	A[1][2] = 4;
-	A[1][3] = 2;
+	//A[1][3] = 2;
 	A[2][0] = 2 - alpha;
 	A[2][1] = 3;
 	A[2][2] = 1;
-	A[2][3] = 9;
-	A[3][0] = 5;
-	A[3][1] = 1;
-	A[3][2] = 1;
-	A[3][3] = 4;
+	//A[2][3] = 9;
+	//A[3][0] = 5;
+	//A[3][1] = 1;
+	//A[3][2] = 1;
+	//A[3][3] = 4;
 
 	//cout << "Исходная A: " << endl << A << endl;
 
+	A[0][0] = 2;
+	A[0][1] = 1;
+	A[0][2] = 1;
+	//A[0][3] = 1;
+	A[1][0] = 1;
+	A[1][1] = 2;
+	A[1][2] = 1;
+	//A[1][3] = 1;
+	A[2][0] = 1;
+	A[2][1] = 1;
+	A[2][2] = 2;
+	//A[2][3] = 1;
+	//A[3][0] = 1;
+	//A[3][1] = 1;
+	//A[3][2] = 1;
+	//A[3][3] = 2;
+
+	/*
 	A[0][0] = 8;
 	A[0][1] = 4;
 	A[0][2] = 1;
@@ -44,6 +62,7 @@ Matrix fillA(Matrix A, int alpha)
 	A[3][1] = 3;
 	A[3][2] = 1;
 	A[3][3] = 9;
+	*/
 
 	//cout << "A в канонической форме: " << endl << A << endl;
 
@@ -55,14 +74,14 @@ Matrix fillf(Matrix f, int alpha)
 	f[0][0] = alpha + 1;
 	f[1][0] = 4;
 	f[2][0] = 3;
-	f[3][0] = alpha - 5;
+	//f[3][0] = alpha - 5;
 
 	//cout << "Исходный f: " << endl << f << endl;
 
 	f[0][0] = 6;
 	f[1][0] = 15;
 	f[2][0] = -51;
-	f[3][0] = 3;
+	//f[3][0] = 3;
 
 	//cout << "f в канонической форме: " << endl << f << endl;
 
@@ -71,23 +90,23 @@ Matrix fillf(Matrix f, int alpha)
 
 Matrix fillB(Matrix A)
 {
-	Matrix B(4, 4);
+	Matrix B(3, 3);
 	B[0][0] = 0;
 	B[0][1] = -A[0][1] / A[0][0];
 	B[0][2] = -A[0][2] / A[0][0];
-	B[0][3] = -A[0][3] / A[0][0];
+	//B[0][3] = -A[0][3] / A[0][0];
 	B[1][0] = -A[1][0] / A[1][1];
 	B[1][1] = 0;
 	B[1][2] = -A[1][2] / A[1][1];
-	B[1][3] = -A[1][3] / A[1][1];
+	//B[1][3] = -A[1][3] / A[1][1];
 	B[2][0] = -A[2][0] / A[2][2];
 	B[2][1] = -A[2][1] / A[2][2];
 	B[2][2] = 0;
-	B[2][3] = -A[2][3] / A[2][2];
-	B[3][0] = -A[3][0] / A[3][3];
-	B[3][1] = -A[3][1] / A[3][3];
-	B[3][2] = -A[3][2] / A[3][3];
-	B[3][3] = 0;
+	//B[2][3] = -A[2][3] / A[2][2];
+	//B[3][0] = -A[3][0] / A[3][3];
+	//B[3][1] = -A[3][1] / A[3][3];
+	//B[3][2] = -A[3][2] / A[3][3];
+	//B[3][3] = 0;
 
 	//cout << "Матрица B: " << endl << B << endl;
 
@@ -96,11 +115,11 @@ Matrix fillB(Matrix A)
 
 Matrix fillg(Matrix A, Matrix f)
 {
-	Matrix g(4, 1);
+	Matrix g(3, 1);
 	g[0][0] = f[0][0] / A[0][0];
 	g[1][0] = f[1][0] / A[1][1];
 	g[2][0] = f[2][0] / A[2][2];
-	g[3][0] = f[3][0] / A[3][3];
+	//g[3][0] = f[3][0] / A[3][3];
 
 	//cout << "Вектор g: " << endl << g << endl;
 
@@ -117,10 +136,10 @@ Matrix fixed_point_iteration(Matrix A, Matrix f, double ep)
 	fout.width(50);
 	fout << right << "Метод простых итераций" << endl << endl;
 
-	Matrix B(4, 4);
+	Matrix B(3, 3);
 	B = fillB(A);
 
-	Matrix g(4, 1);
+	Matrix g(3, 1);
 	g = fillg(A, f);
 	Matrix x(g);
 
@@ -199,23 +218,23 @@ Matrix gradient(Matrix A, Matrix f, double ep)
 
 Matrix fillL(Matrix A)
 {
-	Matrix B(4, 4);
+	Matrix B(3, 3);
 	B[0][0] = 0;
 	B[0][1] = 0;
 	B[0][2] = 0;
-	B[0][3] = 0;
+	//B[0][3] = 0;
 	B[1][0] = A[1][0];
 	B[1][1] = 0;
 	B[1][2] = 0;
-	B[1][3] = 0;
+	//B[1][3] = 0;
 	B[2][0] = A[2][0];
 	B[2][1] = A[2][1];
 	B[2][2] = 0;
-	B[2][3] = 0;
-	B[3][0] = A[3][0];
-	B[3][1] = A[3][1];
-	B[3][2] = A[3][2];
-	B[3][3] = 0;
+	//B[2][3] = 0;
+	//B[3][0] = A[3][0];
+	//B[3][1] = A[3][1];
+	//B[3][2] = A[3][2];
+	//B[3][3] = 0;
 
 	//cout << "Матрица B: " << endl << B << endl;
 
@@ -224,23 +243,23 @@ Matrix fillL(Matrix A)
 
 Matrix fillD(Matrix A)
 {
-	Matrix B(4, 4);
+	Matrix B(3, 3);
 	B[0][0] = A[0][0];
 	B[0][1] = 0;
 	B[0][2] = 0;
-	B[0][3] = 0;
+	//B[0][3] = 0;
 	B[1][0] = 0;
 	B[1][1] = A[1][1];
 	B[1][2] = 0;
-	B[1][3] = 0;
+	//B[1][3] = 0;
 	B[2][0] = 0;
 	B[2][1] = 0;
 	B[2][2] = A[2][2];
-	B[2][3] = 0;
-	B[3][0] = 0;
-	B[3][1] = 0;
-	B[3][2] = 0;
-	B[3][3] = A[3][3];
+	//B[2][3] = 0;
+	//B[3][0] = 0;
+	//B[3][1] = 0;
+	//B[3][2] = 0;
+	//B[3][3] = A[3][3];
 
 	//cout << "Матрица B: " << endl << B << endl;
 
@@ -270,8 +289,8 @@ Matrix relax(Matrix A, Matrix f, double ep)
 	}
 	cout << endl;
 
-	Matrix D(4, 4);
-	Matrix L(4, 4);
+	Matrix D(3, 3);
+	Matrix L(3, 3);
 	D = fillD(A);
 	L = fillL(A);
 
@@ -308,25 +327,25 @@ Matrix zeidel(Matrix A, Matrix f, double ep)
 	fout.width(50);
 	fout << right << "Метод Зейделя" << endl << endl;
 
-	Matrix B(4, 4);
+	Matrix B(3, 3);
 	B = fillB(A);
 
-	Matrix g(4, 1);
+	Matrix g(3, 1);
 	g = fillg(A, f);
 	Matrix x(g);
 
-	Matrix H(4, 4);
-	Matrix F(4, 4);
+	Matrix H(3, 3);
+	Matrix F(3, 3);
 	H = fillL(B);
 	F = B - H;
 
 	Matrix x0(x);
 
-	Matrix E(4, 4);
+	Matrix E(3, 3);
 	E[0][0] = 1;
 	E[1][1] = 1;
 	E[2][2] = 1;
-	E[3][3] = 1;
+	//E[3][3] = 1;
 
 	int k = 0;
 	while (k > -1)
@@ -361,11 +380,11 @@ Matrix gauss_zeidel(Matrix A, Matrix f, double ep)
 
 	Matrix x(f);
 
-	Matrix D(4, 4);
-	Matrix L(4, 4);
+	Matrix D(3, 3);
+	Matrix L(3, 3);
 	D = fillD(A);
 	L = fillL(A);
-	Matrix U(4, 4);
+	Matrix U(3, 3);
 	U = A - D - L;
 
 	
@@ -398,17 +417,17 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	double ep = 1.0/2.0 * 1e-4;
 	int alpha = 5;
-	Matrix A(4, 4);
-	Matrix f(4, 1);
+	Matrix A(3, 3);
+	Matrix f(3, 1);
 	A = fillA(A, alpha);
 	f = fillf(f, alpha);
 
 	fout.open("out.txt");
 
 	fixed_point_iteration(A, f, ep);
-	gradient(A, f, ep);
-	relax(A, f, ep);
-	zeidel(A, f, ep);
+	//gradient(A, f, ep);
+	//relax(A, f, ep);
+	//eidel(A, f, ep);
 	gauss_zeidel(A, f, ep);
 
 	fout.close();
