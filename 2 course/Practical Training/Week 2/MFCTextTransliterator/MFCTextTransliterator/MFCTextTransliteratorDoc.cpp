@@ -59,10 +59,12 @@ void CMFCTextTransliteratorDoc::Serialize(CArchive& ar)
 	if (ar.IsStoring())
 	{
 		// TODO: добавьте код сохранения
+		ar << text;
 	}
 	else
 	{
 		// TODO: добавьте код загрузки
+		ar >> text;
 	}
 }
 
@@ -136,3 +138,11 @@ void CMFCTextTransliteratorDoc::Dump(CDumpContext& dc) const
 
 
 // команды CMFCTextTransliteratorDoc
+
+
+void CMFCTextTransliteratorDoc::DeleteContents()
+{
+	// TODO: Add your specialized code here and/or call the base class
+	text = _T("");
+	CDocument::DeleteContents();
+}

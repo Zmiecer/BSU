@@ -94,8 +94,8 @@ void CLeftView::OnEnChangeEdit1()
 	// with the ENM_CHANGE flag ORed into the mask.
 
 	// TODO:  Add your control notification handler code here
-	GetDocument()->text = text;
-	GetDocument()->UpdateAllViews(0);
+	//GetDocument()->text = text;
+	//GetDocument()->UpdateAllViews(0);
 	
 }
 
@@ -103,5 +103,8 @@ void CLeftView::OnEnChangeEdit1()
 void CLeftView::OnBnClickedButton1()
 {
 	// TODO: Add your control notification handler code here
-	GetDocument()->UpdateAllViews(0);
+	UpdateData();
+	//On open: SetDlgItemText(IDC_EDIT1, GetDocument()->text);
+	GetDocument()->text = text;
+	GetDocument()->UpdateAllViews(this);
 }

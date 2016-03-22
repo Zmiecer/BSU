@@ -6,20 +6,20 @@ import java.util.Set;
  * Created by Zmiecer on 28.02.16.
  */
 
-public class Notifier {
+public class Notifier<T extends Notifiable> {
 
-    Set<Object> notifiables;
+    Set<T> notifiables;
 
-    public Notifier(Set<Object> notifiables) {
+    public Notifier(Set<T> notifiables) {
         this.notifiables = notifiables;
     }
 
     public void doNotifyAll(String message)
     {
-        for (Object object: notifiables)
+        for (T object: notifiables)
         {
-            Student student = (Student) object;
-            student.notify(message);
+            //Student student = (Student) object;
+            object.notify(message);
         }
     }
 }

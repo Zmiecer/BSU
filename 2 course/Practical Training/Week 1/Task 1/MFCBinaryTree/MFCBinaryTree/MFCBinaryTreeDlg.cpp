@@ -12,7 +12,6 @@
 #define new DEBUG_NEW
 #endif
 
-
 // Диалоговое окно CAboutDlg используется для описания сведений о приложении
 
 class CAboutDlg : public CDialogEx
@@ -57,6 +56,7 @@ CMFCBinaryTreeDlg::CMFCBinaryTreeDlg(CWnd* pParent /*=NULL*/)
 void CMFCBinaryTreeDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	//DDX_Control(pDX, IDC_TREE1, m_tree);
 }
 
 BEGIN_MESSAGE_MAP(CMFCBinaryTreeDlg, CDialogEx)
@@ -147,33 +147,44 @@ BOOL CMFCBinaryTreeDlg::OnInitDialog()
 
 	// TODO: добавьте дополнительную инициализацию
 
+	
+
 
 	CFileDialog fileDialog(true, NULL, NULL, OFN_HIDEREADONLY | OFN_NOCHANGEDIR, _T("Text files (*.txt)|*.txt|All files (*.*)|*.*||"));
 
 	if (fileDialog.DoModal() == IDOK)
 	{
-		btree data;
+		
 		ifstream fin;
 		fin.open(fileDialog.GetFileName());
+		btree data;
+		int size = 0;
 		while (fin)
 		{
 			int tmp;
 			fin >> tmp;
 			data.insert(tmp);
+			size++;
 		}
-		CString test;
-		data.straight(&test);
-		cout << test << "lol" << endl;
-
-		CTreeCtrl* result = new CTreeCtrl;// = (CTreeCtrl*)GetDlgItem(IDC_TREE1);
-		result->Create(WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP |
-			TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT |
-			TVS_SINGLEEXPAND | TVS_SHOWSELALWAYS |
-			TVS_TRACKSELECT,
-			CRect(10, 10, 500, 300), this, 0x1221);
-		//treeOut(data.getRoot(), *result, NULL);
-		func(test, *result, NULL, 0);
 		
+		if (size != 1)
+		{
+			CTreeCtrl* result = new CTreeCtrl;
+			result->Create(WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP |
+				TVS_HASLINES | TVS_HASBUTTONS | TVS_LINESATROOT |
+				TVS_SINGLEEXPAND | TVS_SHOWSELALWAYS |
+				TVS_TRACKSELECT,
+				CRect(10, 10, 500, 300), this, 0x1221);
+
+			int arrSize = 1 << size;
+			int *arr = new int[arrSize];
+			for (int i = 1; i <= arrSize; i++){
+				arr[i] = 0;
+			}
+
+			data.intoArray(arr, 1);
+			showTree(arr, arrSize, 1, NULL, result);
+		}
 		
 	}
 	else
@@ -182,6 +193,19 @@ BOOL CMFCBinaryTreeDlg::OnInitDialog()
 
 	return TRUE;  // возврат значения TRUE, если фокус не передан элементу управления
 	
+}
+
+void CMFCBinaryTreeDlg::showTree(int* arr, int arrSize, int i, HTREEITEM hParent, CTreeCtrl* result)
+{
+	CString str;
+	if (arr[i] != 0 && i < arrSize){
+		str.Format(_T("%d"), arr[i]);
+		HTREEITEM root = result->InsertItem((LPCTSTR)str, hParent);
+		result->Expand(hParent, TVE_EXPAND);
+
+		showTree(arr, arrSize, 2 * i, root, result);
+		showTree(arr, arrSize, 2 * i + 1, root, result);
+	}
 }
 
 void CMFCBinaryTreeDlg::OnSysCommand(UINT nID, LPARAM lParam)

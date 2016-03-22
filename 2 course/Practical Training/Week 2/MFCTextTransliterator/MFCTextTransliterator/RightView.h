@@ -3,6 +3,7 @@
 
 #include "MFCTextTransliteratorDoc.h"
 #include "afxwin.h"
+#include <map>
 
 // CRightView form view
 
@@ -32,6 +33,9 @@ protected:
 	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 public:
 	CEdit edit;
+	virtual void OnInitialUpdate();
+	std::map<int, int> mp;
+	CString transliterate(CString str);
 };
 
 

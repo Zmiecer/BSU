@@ -118,3 +118,16 @@ void btree::straight(node *Node, CString* str)
 	straight(Node->left, str);
 	straight(Node->right, str);
 }
+
+void btree::intoArray(int * arr, int i){
+	intoArray(root, arr, i);
+}
+void btree::intoArray(node *Node, int* arr, int i)
+{
+	if (!Node) 
+		return;
+	arr[0]++;
+	arr[i] = Node->key_value;
+	intoArray(Node->left, arr, 2 * i);
+	intoArray(Node->right, arr, 2 * i + 1);
+}

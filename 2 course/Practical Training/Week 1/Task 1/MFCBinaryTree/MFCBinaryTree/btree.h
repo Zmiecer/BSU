@@ -21,25 +21,30 @@ public:
 	btree();
 	~btree();
 
-	void insert(int key);
-	node *search(int key);
+	void insert(int);
+	node *search(int);
 	void destroy_tree();
 	void pre_order() const;
 	node *getRoot();
 
 	CString str = _T("");
 
-	void straight(CString* str);
+	void straight(CString*);
+
+	
+	void intoArray(int *, int);
+	void intoArray(node *, int *, int);
 
 private:
-	void destroy_tree(node *leaf);
-	void insert(int key, node *leaf);
-	node *search(int key, node *leaf);
-	void pre_order(node *Node) const;
+
+	void destroy_tree(node *);
+	void insert(int , node *);
+	node *search(int , node *);
+	void pre_order(node *) const;
 
 	node *root;
 
-	void straight(node *root, CString* str);
+	void straight(node *, CString*);
 
 	
 };

@@ -4,7 +4,8 @@
 #include "stdafx.h"
 #include "MFCTextTransliterator.h"
 #include "RightView.h"
-
+#include <fstream>
+#include <map>
 
 // CRightView
 
@@ -23,8 +24,6 @@ CRightView::~CRightView()
 void CRightView::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT1, text);
-	DDX_Control(pDX, IDC_EDIT1, edit);
 }
 
 BEGIN_MESSAGE_MAP(CRightView, CFormView)
@@ -56,11 +55,51 @@ CMFCTextTransliteratorDoc* CRightView::GetDocument() const // встроена неотлажен
 
 
 // CRightView message handlers
-
+using namespace std;
 
 void CRightView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
 {
 	// TODO: Add your specialized code here and/or call the base class
-	edit.SetWindowText(text);
-	text = GetDocument()->text;
+	
+	ifstream fin;
+	fin.open("rules.txt");
+	//map<int, int> mp;
+	int itmp, stmp;
+	while (fin)
+	{
+		fin >> itmp >> stmp;
+		mp[itmp] = stmp;
+	}
+	fin.close();
+
+	//CString str = GetDocument()->text;
+	CString tmp = transliterate(GetDocument()->text);
+	
+	SetDlgItemText(IDC_EDIT1, _T(""));
+	SetDlgItemText(IDC_EDIT1, tmp);
+	GetDocument()->SetModifiedFlag(true);
+}
+
+CString CRightView::transliterate(CString str)
+{
+	CString tmp = _T("");
+	for (int i = 0; i < str.GetLength(); i++)
+	{
+		if (str[i] >= 1072 && str[i] <= 1103)
+			tmp.Insert(i, mp[str[i]]);
+		else
+			if (str[i] >= 1040 && str[i] <= 1071)
+				tmp.Insert(i, (mp[str[i] + 32] - 32));
+			else
+				tmp.Insert(i, str[i]);
+	}
+	return tmp;
+}
+
+void CRightView::OnInitialUpdate()
+{
+	CFormView::OnInitialUpdate();
+
+	// TODO: Add your specialized code here and/or call the base class
+	GetDocument()->SetModifiedFlag(false);
 }

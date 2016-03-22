@@ -101,6 +101,7 @@
     <Text Include="in1.txt" />
     <Text Include="in2.txt" />
     <Text Include="in3.txt" />
+    <Text Include="in4.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

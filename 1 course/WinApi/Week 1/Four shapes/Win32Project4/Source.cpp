@@ -55,7 +55,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	hWnd = CreateWindow(
 		szClassName,         // указатель на строку зарегистрированного имени класса
 		szTitle,			 // указатель на строку заголовка окна
-		WS_OVERLAPPEDWINDOW && WS_THICKFRAME, // стиль окна
+		WS_OVERLAPPEDWINDOW, // стиль окна
 		300,       // горизонтальная координата окна
 		100,       // вертикальная координата окна
 		800,       // ширина окна

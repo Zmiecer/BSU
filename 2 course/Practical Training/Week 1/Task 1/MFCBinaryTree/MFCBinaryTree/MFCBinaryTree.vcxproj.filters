@@ -25,6 +25,9 @@
     <Text Include="in3.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="in4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MFCBinaryTree.h">

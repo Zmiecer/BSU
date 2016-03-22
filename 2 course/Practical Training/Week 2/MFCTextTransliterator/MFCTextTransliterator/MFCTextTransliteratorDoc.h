@@ -47,4 +47,5 @@ protected:
 #endif // SHARED_HANDLERS
 public:
 	CString text;
+	virtual void DeleteContents();
 };

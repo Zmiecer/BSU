@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "afxcmn.h"
 
 
 // диалоговое окно CMFCBinaryTreeDlg
@@ -30,4 +31,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	void showTreePoint(node treePoint);
+	void showTree(int* arr, int arrSize, int i, HTREEITEM hParent, CTreeCtrl* result);
 };

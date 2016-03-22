@@ -147,7 +147,7 @@ void RightView::OnBnClickedButton1()
 					break;
 				else
 				{
-					AfxMessageBox(_T("Error!"));
+					//AfxMessageBox(_T("Error!"));
 					ok = false;
 					coma = true;
 					break;
@@ -186,7 +186,7 @@ void RightView::OnBnClickedButton1()
 					}
 					else
 					{
-						AfxMessageBox(_T("Error!"));
+						//AfxMessageBox(_T("Error!"));
 						ok = false;
 						break;
 					}
