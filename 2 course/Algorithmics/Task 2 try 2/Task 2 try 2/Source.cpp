@@ -44,20 +44,24 @@ int main()
 		}
 	}
 
-	deque<char> key;
+	string key;
 	int k = 0;
+	int t = 0;
 	for (int i = 0; i < str.size(); i++)
 	{
 		if (!key.empty())
 		{
-			if (key[k] == str[i])
+			if (key[k%key.size()] == str[i])
 			{
 				k++;
 				if (k >= key.size())
+				{
 					k = 0;
+				}
 			}
 			else
 			{
+				//key.append(str.substr(i - k, k + 1));
 				key.push_back(str[i]);
 				k = 0;
 			}
@@ -68,7 +72,7 @@ int main()
 	
 	string minkey(key.begin(), key.end());
 	
-	
+	/*
 	for (int i = 0; i < key.size(); i++)
 	{
 		char t = key[0];
@@ -78,7 +82,7 @@ int main()
 		if (tmpkey < minkey)
 			minkey = tmpkey;
 	}
-	
+	*/
 
 
 	// Тут будет лексикографическое сравнение строк за O(n). А сейчас я хочу спать.
@@ -115,6 +119,6 @@ int main()
 	*/
 
 	ofstream fout("littera.out");
-	fout << minkey << endl;
+	cout << minkey << endl;
 	fout.close();
 }

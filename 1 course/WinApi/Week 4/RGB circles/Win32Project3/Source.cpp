@@ -88,7 +88,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	COLORREF col;
 	static int x11, x12, x21, x22, x31, x32, y11, y12, y21, y22, y31, y32,		a, b, c,		u, v,		k, l, m;
 	static char click;
-	
 
 	switch (message)
 	{
@@ -127,7 +126,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		GetClientRect(hwnd, &rect);
 		hDC = BeginPaint(hwnd, &ps);
-
 
 		col = GetPixel(hDC, u, v);
 		if (col == RGB(255, 0, 0))
