@@ -57,6 +57,8 @@ public class DynamicTreeDemo extends JPanel
     
     private DynamicTree treePanel;
 
+    private Map<String, Map<String, Set<String>>> map = new HashMap();
+
     File file;
 
     public DynamicTreeDemo() {
@@ -79,22 +81,83 @@ public class DynamicTreeDemo extends JPanel
         clearButton.addActionListener(this);
 
         JButton openFileButton = new JButton("Open");
-        openFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                        "Text files", "txt");
-                chooser.setFileFilter(filter);
-                chooser.setCurrentDirectory(new File("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Practical Training\\Week 4\\Task43"));
-                int returnVal = chooser.showOpenDialog(getParent());
-                if(returnVal == JFileChooser.APPROVE_OPTION) {
-                    file = new File(chooser.getSelectedFile().getPath());
-                    treePanel.clear();
-                    populateTree(treePanel);
-                }
+        openFileButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "Text files", "txt");
+            chooser.setFileFilter(filter);
+            chooser.setCurrentDirectory(new File("C:\\Users\\Дмитрий\\Документы\\GitHub\\BSU\\2 course\\Practical Training\\Week 4\\Task43"));
+            int returnVal = chooser.showOpenDialog(getParent());
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                file = new File(chooser.getSelectedFile().getPath());
+                treePanel.clear();
+                map.clear();
+                populateTree("");
             }
         });
+
+        JButton editButton = new JButton("Edit");
+        editButton.addActionListener(e1 -> {
+            try {
+                JDialog editDialog = new JDialog();
+                editDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                editDialog.setBounds(150, 150, 300, 200);
+                JPanel panel = new JPanel();
+                panel.setLayout(new GridLayout(8, 1));
+
+                JTextField fieldCourse = new JTextField();
+                JLabel labelCourse = new JLabel("Course:");
+                JTextField fieldGroup = new JTextField();
+                JLabel labelGroup = new JLabel("Group:");
+                JTextField fieldName = new JTextField();
+                JLabel labelName = new JLabel("Name:");
+                fieldCourse.setText(treePanel.getSelectionPath().toString().substring(18, 19));
+                fieldGroup.setText(treePanel.getSelectionPath().toString().substring(27, 28));
+                fieldName.setText(treePanel.getSelectionPath().toString().substring(30, treePanel.getSelectionPath().toString().length() - 1));
+                int course = Integer.parseInt(treePanel.getSelectionPath().toString().substring(18, 19));
+                int group = Integer.parseInt(treePanel.getSelectionPath().toString().substring(27, 28));
+                map.get("Course " + course).get("Group " + group).remove(treePanel.getSelectionPath().toString().substring(30, treePanel.getSelectionPath().toString().length() - 1));
+
+                JButton okButton = new JButton("OK");
+                okButton.addActionListener(e2 -> {
+                    StringBuffer str = new StringBuffer();
+                    str.append(fieldCourse.getText());
+                    str.append(' ');
+                    str.append(fieldGroup.getText());
+                    str.append(' ');
+                    str.append(fieldName.getText());
+                    populateTree(str.toString());
+                    editDialog.setVisible(false);
+                });
+                JButton cancelButton = new JButton("Cancel");
+                cancelButton.addActionListener(e3 -> {
+                    editDialog.setVisible(false);
+                });
+
+                panel.add(labelCourse);
+                panel.add(fieldCourse);
+                panel.add(labelGroup);
+                panel.add(fieldGroup);
+                panel.add(labelName);
+                panel.add(fieldName);
+                panel.add(okButton);
+                panel.add(cancelButton);
+                editDialog.setContentPane(panel);
+                editDialog.setVisible(true);
+            }
+            catch (NullPointerException e)
+            {
+                JOptionPane.showMessageDialog(this, "Choose element to edit!");
+            }
+            catch (StringIndexOutOfBoundsException e)
+            {
+                JOptionPane.showMessageDialog(this, "Choose the student!");
+            }
+
+        });
+
+
+
 
         //Lay everything out.
         treePanel.setPreferredSize(new Dimension(600, 400));
@@ -102,19 +165,28 @@ public class DynamicTreeDemo extends JPanel
 
         JPanel panel = new JPanel(new GridLayout(0,4));
         panel.add(addButton);
-        panel.add(removeButton); 
-        panel.add(clearButton);
+        panel.add(removeButton);
+        panel.add(editButton);
+        //panel.add(clearButton);
         panel.add(openFileButton);
 	    add(panel, BorderLayout.SOUTH);
     }
 
-    public void populateTree(DynamicTree treePanel) {
+    public void populateTree(String str) {
 
-        Map<String, Map<String, Set<String>>> map = new HashMap();
+
 
         try {
             //file = new File("input1.txt");
-            Scanner sc = new Scanner(file);
+            treePanel.clear();
+
+            Scanner sc;
+            if (str.equals(""))
+                sc = new Scanner(file);
+            else
+            {
+                sc = new Scanner(str);
+            }
 
             while (sc.hasNext()) {
                 int i;
@@ -159,11 +231,11 @@ public class DynamicTreeDemo extends JPanel
         }
         catch (FileNotFoundException e)
         {
-            System.out.println("File not found!");
+            JOptionPane.showMessageDialog(this, "File not found!");
         }
         catch (InputMismatchException e)
         {
-            System.out.println("Enter correct data!");
+            JOptionPane.showMessageDialog(this, "Enter correct data!");
         }
 
         for (Map.Entry<String, Map<String, Set<String>>> entry: map.entrySet())

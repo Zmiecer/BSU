@@ -36,16 +36,9 @@ package by.bsu.zmiecer;
  * a tutorial reader.
  */
 
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.tree.*;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 
@@ -66,6 +59,44 @@ public class DynamicTree extends JPanel {
         tree.getSelectionModel().setSelectionMode
                 (TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setShowsRootHandles(true);
+
+
+        tree.setCellRenderer(new DefaultTreeCellRenderer() {
+            @Override
+            public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+                super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+                switch(((DefaultMutableTreeNode)value).getLevel())
+                {
+                    case 3:
+                    {
+                        ImageIcon icon = new ImageIcon("star.png");
+                        setIcon(icon);
+                        break;
+                    }
+                    case 2:
+                    {
+                        ImageIcon icon = new ImageIcon("flag_belarus.png");
+                        setIcon(icon);
+                        break;
+                    }
+                    case 1:
+                    {
+                        ImageIcon icon = new ImageIcon("flag_ukraine.png");
+                        setIcon(icon);
+                        break;
+                    }
+                    default:
+                    {
+                        ImageIcon icon = new ImageIcon("flag_england.png");
+                        setIcon(icon);
+                        break;
+                    }
+                }
+
+                //tree.expandRow(row);
+                return this;
+            }
+        });
 
         JScrollPane scrollPane = new JScrollPane(tree);
         add(scrollPane);
@@ -133,6 +164,11 @@ public class DynamicTree extends JPanel {
             tree.scrollPathToVisible(new TreePath(childNode.getPath()));
         }
         return childNode;
+    }
+
+    public TreePath getSelectionPath()
+    {
+        return tree.getSelectionPath();
     }
 
     class MyTreeModelListener implements TreeModelListener {

@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Created by Zmiecer on 15.03.16.
  */
+
 public class CountryFrame extends JFrame {
     public CountryFrame() throws HeadlessException {
         setBounds(100, 100, 600, 400);

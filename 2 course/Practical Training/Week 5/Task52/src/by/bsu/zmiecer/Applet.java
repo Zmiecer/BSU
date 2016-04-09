@@ -1,17 +1,25 @@
 package by.bsu.zmiecer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Hashtable;
 
 /**
  * Created by Zmiecer on 27.03.2016.
  */
 public class Applet extends JApplet {
+
     @Override
     public void init() {
+
+
+
         JPanel pane = new JPanel();
         PointOnCircle point =  new PointOnCircle();
 

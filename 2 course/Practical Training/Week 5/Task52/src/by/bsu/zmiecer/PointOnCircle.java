@@ -18,7 +18,18 @@ public class PointOnCircle extends JComponent {
     private double angle;
     private int speed;
     private boolean right = true;
+
+
+    BufferedImage image;
+
     public PointOnCircle() {
+        URL imageURL = getClass().getResource("/star.png");
+        try {
+            image = ImageIO.read(imageURL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         angle = 0;
         speed = 15;
         Timer timer = new Timer(30, e -> {
@@ -59,23 +70,10 @@ public class PointOnCircle extends JComponent {
         */
 
 
-        BufferedImage image;
 
-        try {
-            URL imageURL = getClass().getResource("/star.png");
-            image = ImageIO.read(imageURL);
-            g2d.drawImage(image, (int)x - 25, (int)y - 25, this);
-            }
-        catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        catch (IOException e) {
-                e.printStackTrace();
-            }
-        catch (IllegalArgumentException e)
-        {
 
-        }
+
+        g2d.drawImage(image, (int)x - 25, (int)y - 25, this);
 
     }
 

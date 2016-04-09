@@ -3,8 +3,6 @@ package by.bsu.zmiecer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Zmiecer on 27.03.2016.
@@ -38,16 +36,23 @@ public class TourFrame extends JFrame {
             //  renderers to be used based on Class
             public Class getColumnClass(int column)
             {
-                try {
-                    if (getValueAt(0, column) != "")
-                        return getValueAt(0, column).getClass();
-                    else throw new NullPointerException();
-                }
-                catch (NullPointerException e)
-                {
-                    JOptionPane.showMessageDialog(this, "Enter correct data");
-
-                    return Object.class;
+                switch (column) {
+                    case (0): {
+                        return String.class;
+                    }
+                    case (1): {
+                        return String.class;
+                    }
+                    case (2): {
+                        return Integer.class;
+                    }
+                    case (3): {
+                        return Boolean.class;
+                    }
+                    default:
+                    {
+                        return String.class;
+                    }
                 }
             }
         };
@@ -61,20 +66,17 @@ public class TourFrame extends JFrame {
 
 
         JLabel labelPrice = new JLabel("Total price: 0");
-        JButton buttonComputate = new JButton("Computate");
 
-
-        buttonComputate.addActionListener(e -> {
-                int price = 0;
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    if((boolean)model.getValueAt(i,3) == true)
-                    {
-                        price += (int)model.getValueAt(i,2);
-                    }
+        table.addPropertyChangeListener(evt -> {
+            int price = 0;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                if((boolean)model.getValueAt(i,3) == true)
+                {
+                    price += (int)model.getValueAt(i,2);
                 }
-                labelPrice.setText(new String("Total price: " + price));
             }
-        );
+            labelPrice.setText(new String("Total price: " + price));
+        });
 
 
 
@@ -83,7 +85,6 @@ public class TourFrame extends JFrame {
         contentPane.setLayout(new BorderLayout());
         contentPane.add(scrollPane, BorderLayout.CENTER);
         contentPane.add(buttonAdd, BorderLayout.NORTH);
-        contentPane.add(buttonComputate, BorderLayout.EAST);
         contentPane.add(labelPrice, BorderLayout.SOUTH);
         setContentPane(contentPane);
 

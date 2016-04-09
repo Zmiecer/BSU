@@ -12,9 +12,8 @@ class MyPanel extends JPanel {
     private int lineCoord = 0;
 
     @Override
-    public void paint(Graphics g)
-    {
-        super.paint(g);
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.drawOval(0, 0, 100, 100);
         double cos = Math.cos(6*lineCoord*2*Math.PI/360 - Math.PI/2);
         double sin = Math.sin(6*lineCoord*2*Math.PI/360 - Math.PI/2);
