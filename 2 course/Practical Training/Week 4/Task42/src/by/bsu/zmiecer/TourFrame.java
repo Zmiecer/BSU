@@ -56,6 +56,9 @@ public class TourFrame extends JFrame {
                 }
             }
         };
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(new ImageRenderer());
+        }
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
         table.setRowHeight(48);
