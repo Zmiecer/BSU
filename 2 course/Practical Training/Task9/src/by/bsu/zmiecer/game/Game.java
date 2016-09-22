@@ -1,6 +1,7 @@
 package by.bsu.zmiecer.game;
 
 import by.bsu.zmiecer.IO.Input;
+import by.bsu.zmiecer.audio.AudioThread;
 import by.bsu.zmiecer.display.Display;
 import by.bsu.zmiecer.game.entity.*;
 import by.bsu.zmiecer.graphics.TextureAtlas;
@@ -37,9 +38,9 @@ public class Game implements Runnable {
     private boolean             running;
     private Thread              gameThread;
     private Graphics2D          graphics;
-    private Input               input;
-    private static TextureAtlas        atlas;
-    private static Player       player;
+    private Input input;
+    private static TextureAtlas atlas;
+    private static Player player;
     private static ArrayList<Entity>   entities;
     private static Stack<Entity> destroyed = new Stack<>();
     private static Stack<Entity> added = new Stack<>();
@@ -79,6 +80,8 @@ public class Game implements Runnable {
 
         running = true;
         gameThread = new Thread(this);
+        Thread audio = new Thread(new AudioThread());
+        audio.start();
         gameThread.start();
     }
 
@@ -187,7 +190,7 @@ public class Game implements Runnable {
 
             if (count >= Time.SECOND)
             {
-                Display.setTitle(TITLE + " || fps: " + fps + " | upd: " + upd + " | updl: " + updl);
+                Display.setTitle(TITLE + " || fps: " + fps + " | upd: " + upd + " | updl: " + updl + " | enemies left: " + Game.enemyCount);
                 upd = 0;
                 fps = 0;
                 updl = 0;
@@ -204,23 +207,23 @@ public class Game implements Runnable {
 
     private void shot(Entity e1, Entity e2)
     {
-        if(e1.type == EntityType.Bullet)
+        if(e1.type == EntityType.BULLET)
         {
             if (Math.abs(e1.getX() + 4*SCALE - (e2.getX() + 8*SCALE)) < 8*SCALE && Math.abs(e1.getY() + 4*SCALE - (e2.getY() + 8*SCALE)) < 8*SCALE)
             {
-                if(e2.type == EntityType.Enemy)
+                if(e2.type == EntityType.ENEMY)
                 {
                     destroy(e1);
                     e2.shot();
                 }
-                else if (e2.type == EntityType.Player)
+                else if (e2.type == EntityType.PLAYER)
                 {
                     destroy(e1);
                     e2.shot();
                     //gameOver();
                     // stop();
                 }
-                else if (e2.type == EntityType.Bullet && e1 != e2)
+                else if (e2.type == EntityType.BULLET && e1 != e2)
                 {
                     if (Math.abs(e1.getX() + 4*SCALE - (e2.getX() + 4*SCALE)) < 4*SCALE && Math.abs(e1.getY() + 4*SCALE - (e2.getY() + 4*SCALE)) < 4*SCALE)
                     {
@@ -230,10 +233,10 @@ public class Game implements Runnable {
                 }
             }
         }
-        else if (e1.type == EntityType.Enemy)
+        else if (e1.type == EntityType.ENEMY)
         {
             if (Math.abs(e1.getX() + 8*SCALE - (e2.getX() + 8*SCALE)) < 8*SCALE && Math.abs(e1.getY() + 8*SCALE - (e2.getY() + 8*SCALE)) < 8*SCALE) {
-                if (e2.type == EntityType.Enemy) {
+                if (e2.type == EntityType.ENEMY) {
                     int dir = e1.getHeading().toInt();
                     dir += 2;
                     dir %= 4;
@@ -242,7 +245,7 @@ public class Game implements Runnable {
                     dir += 2;
                     dir %= 4;
                     e2.setDir(dir);
-                } else if (e2.type == EntityType.Player) {
+                } else if (e2.type == EntityType.PLAYER) {
                     int dir = e1.getHeading().toInt();
                     dir += 2;
                     dir %= 4;

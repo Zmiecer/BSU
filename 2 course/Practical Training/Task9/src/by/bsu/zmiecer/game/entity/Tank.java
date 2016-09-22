@@ -111,9 +111,9 @@ public abstract class Tank extends Entity {
         {
             case 0:
             case 5: {
-                if (this.type == EntityType.Enemy) {
+                if (this.type == EntityType.ENEMY) {
                     Game.enemyCount--;
-                    System.out.println(Game.enemyCount);
+                    //System.out.println(Game.enemyCount);
                 }
                 else
                 {

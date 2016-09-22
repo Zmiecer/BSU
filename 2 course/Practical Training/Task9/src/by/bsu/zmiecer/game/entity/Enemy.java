@@ -5,7 +5,6 @@ import by.bsu.zmiecer.game.Game;
 import by.bsu.zmiecer.graphics.TextureAtlas;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -16,7 +15,7 @@ public class Enemy extends Tank
 {
     public Enemy(float x, float y, int level, TextureAtlas atlas)
     {
-        super(EntityType.Enemy, x, y, level, atlas);
+        super(EntityType.ENEMY, x, y, level, atlas);
 
         spriteMap = new HashMap<>();
 
@@ -140,8 +139,8 @@ public class Enemy extends Tank
 
 //    private void moveToPlayer()
 //    {
-//        float difX = x - Player.getPX();
-//        float difY = y - Player.getPY();
+//        float difX = x - PLAYER.getPX();
+//        float difY = y - PLAYER.getPY();
 //
 //        if(difX * oldDifX < 0)
 //        {

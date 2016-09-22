@@ -22,9 +22,9 @@ public class Player extends Tank
 
     public Player(float x, float y, int level, TextureAtlas atlas)
     {
-        super(EntityType.Player, x, y, level, atlas);
-//        Player.x = x;
-//        Player.y = y;
+        super(EntityType.PLAYER, x, y, level, atlas);
+//        PLAYER.x = x;
+//        PLAYER.y = y;
 
         spriteMap = new HashMap<>();
 
@@ -44,8 +44,8 @@ public class Player extends Tank
 
     public void update(Input input)
     {
-        float newX = x; //Player.x;
-        float newY = y; //Player.y;
+        float newX = x; //PLAYER.x;
+        float newY = y; //PLAYER.y;
 
         if(alive)
         {
@@ -115,8 +115,8 @@ public class Player extends Tank
             newY = Game.HEIGHT - SPRITE_SCALE*scale;
         }
 
-//        Player.x = newX;
-//        Player.y = newY;
+//        PLAYER.x = newX;
+//        PLAYER.y = newY;
         x = newX;
         y = newY;
 

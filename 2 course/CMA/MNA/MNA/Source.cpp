@@ -1,58 +1,70 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <math.h>
 
 using namespace std;
 
-
-// Можно запилить класс многочленов от одной переменной/класс переменных, состоящий из коэффициента и степени и радоваться жизни. Но лень =)
-class mn
+vector<double> fillX(double a, double b, int numberOfNodes)
 {
-public:
-	double degree;
-	double koeff;
-
-	
-};
-
-double res(vector<double> x, vector<double> f, double t)
-{
-	double ans = 0.0;
-	for (int i = 0; i < f.size(); i++)
+	vector<double> x;
+	for (double i = a; i <= b; i += (b - a) / numberOfNodes)
 	{
-		double tmp = 1.0;
-		for (int j = 0; j < x.size(); j++)
-		{
-			if (j != i)
-				tmp *= (t - x[j]) / (x[i] - x[j]);
-		}
-		tmp *= f[i];
-		ans += tmp;
+		x.push_back(i);
 	}
-	return ans;
+	return x;
+}
+
+vector<double> fillF(vector<double> x)
+{
+	vector<double> f;
+	for (int i = 0; i < x.size(); i++)
+	{
+		f.push_back(exp(x[i])*cos(x[i]) + log(x[i]));
+	}
+	return f;
+}
+
+void lagrange(int numberOfNodes, double a = 1, double b = 3, double step = 0.01)
+{
+	vector<double> x = fillX(a, b, numberOfNodes);
+
+	vector<double> f = fillF(x);
+
+	ofstream fout("output.txt");
+	double ans = 0.0;
+	for (double t = a; t <= b; t += step)
+	{
+		for (int i = 0; i < f.size(); i++)
+		{
+			double tmp = 1.0;
+			for (int j = 0; j < x.size(); j++)
+			{
+				if (j != i)
+					tmp *= (t - x[j]) / (x[i] - x[j]);
+			}
+			tmp *= exp(x[i])*cos(x[i]) + log(x[i]);
+			ans += tmp;
+		}
+		fout << fixed << ans << endl; // Вывод значения в текущей точке
+		ans = 0;
+	}
+	fout.close();
 }
 
 int main()
 {
-	vector<double> x;
-	vector<double> f;
+	double a = 1;
+	double b = 3;
+	int numberOfNodes = 2;
 
-	int a = 1;
-	int b = 3;
+	cout << "Enter the starting position:" << endl;
+	cin >> a;
+	cout << "Enter the final position:" << endl;
+	cin >> b;
 
-	int n = 2;
-
-	x.push_back(a);
-	f.push_back(1.469);
-
-	x.push_back(b);
-	f.push_back(-18.786);
-
-	ofstream fout("output.txt");
-	for (double i = a; i < b; i += 0.01)
-	{
-		fout << fixed << res(x, f, i) << endl;
-	}
-	fout.close();
-
+	cout << "Enter the number of interpolation nodes:" << endl;
+	cin >> numberOfNodes;
+	
+	lagrange(numberOfNodes);
 }

@@ -2,8 +2,6 @@ package by.bsu.zmiecer.game.entity;
 
 import by.bsu.zmiecer.IO.Input;
 import by.bsu.zmiecer.game.Game;
-import by.bsu.zmiecer.game.entity.Entity;
-import by.bsu.zmiecer.game.entity.EntityType;
 import by.bsu.zmiecer.graphics.Sprite;
 import by.bsu.zmiecer.graphics.SpriteSheet;
 import by.bsu.zmiecer.graphics.TextureAtlas;

@@ -5,9 +5,9 @@ package by.bsu.zmiecer.game.entity;
  */
 public enum EntityType
 {
-    Player,
-    Bullet,
-    Enemy,
+    PLAYER,
+    BULLET,
+    ENEMY,
     Explosion,
     Eagle,
     GameOverTile,

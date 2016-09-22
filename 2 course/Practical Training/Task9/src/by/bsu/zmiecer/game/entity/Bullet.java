@@ -16,7 +16,7 @@ public class Bullet extends Entity {
 
     public Bullet(float x, float y, int speed, String flight, TextureAtlas atlas)
     {
-        super(EntityType.Bullet, x, y, speed, atlas);
+        super(EntityType.BULLET, x, y, speed, atlas);
         this.speed = speed;
 
         spriteMap = new HashMap<>();

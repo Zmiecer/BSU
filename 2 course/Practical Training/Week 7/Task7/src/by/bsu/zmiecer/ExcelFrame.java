@@ -21,7 +21,7 @@ public class ExcelFrame extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setBounds(100, 100, 800, 400);
-        setTitle("Excel");
+        setTitle("Mini Date Excel");
 
         table = new JTable(ROWS, COLUMNS)
         {
@@ -64,7 +64,7 @@ public class ExcelFrame extends JFrame
 //                + ")" + "[.]" + "(\\d+)[+-](\\d+)$");
 
         private Pattern letterDatePattern = Pattern.compile("^[=]([A-Z](\\d+))[+-](\\d+)$");
-        private Pattern funcPattern = Pattern.compile("^[=]((MIN)|(MAX))[(]((\\d+)[.](\\d+)[.](\\d+)[,])*([A-Z](\\d+)[,])*(((\\d+)[.](\\d+)[.](\\d+))|([A-Z](\\d+)))[)]");
+        private Pattern funcPattern = Pattern.compile("^[=]((MIN)|(MAX))[(](((\\d+)[.](\\d+)[.](\\d+)[,])|([A-Z](\\d+)[,]))*(((\\d+)[.](\\d+)[.](\\d+))|([A-Z](\\d+)))[)]");
         private Matcher m;
 
 
@@ -78,7 +78,7 @@ public class ExcelFrame extends JFrame
             }
 
             textField.setText(strings[row][column]);
-
+            ExcelFrame.this.repaint();
             return textField;
         }
 
@@ -138,7 +138,12 @@ public class ExcelFrame extends JFrame
                     m.find();
                     int change = Integer.parseInt(m.group());
 
-                    //String temp1 = (String) table.getValueAt(indexY, indexX);
+                    char checker=new Character((char)('A' + column));
+                    System.out.println(checker);
+                    int rrow = row + 1;
+                    if(((String)table.getValueAt(indexY, indexX)).contains("" + checker + rrow))
+                        throw new IllegalStateException();
+
                     String temp1 = strings[indexY][indexX];
                     m = Pattern.compile("(\\d+)").matcher(temp1);
                     m.find();

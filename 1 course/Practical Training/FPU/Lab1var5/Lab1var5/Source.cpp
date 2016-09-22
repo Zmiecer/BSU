@@ -5,37 +5,28 @@ using namespace std;
 
 double x;
 double a = 0, b = 0, c = 0;
-double var = 11;
-double s = 1;
+const double ELEVEN = 11;
 double y = 0;
 double resl, resc, resr;
-double dva = 2;
-double h0 = 0, h2 = 2, pi = 0, h = 0, hdiv, i = 0;
-double k;
-double s1;
-double k1;
-double n;
-double base;
-int m = 0;
-int kol;
-double diff;
+const double TWO = 2;
+bool hasSolutions = false;
 
 int solve(double ll, double rr)
 {
 	double lbound = ll, rbound = rr, center = 0;
 	_asm
 	{
-		mov ecx, 1000
+		mov ecx, 100
 		start:
 		//Считает середину
 		finit
 			fld lbound
 			fadd rbound
-			fdiv dva
+			fdiv TWO
 			fstp center
 
 
-			//Считает значение функции в rbound
+			//Считает значение функции в lbound
 			fld lbound
 			fstp x
 
@@ -44,7 +35,7 @@ int solve(double ll, double rr)
 			fmul x
 			fmul x //1
 			fld x
-			fadd var
+			fadd ELEVEN
 			fstp y
 			fld b
 			fdiv y //2
@@ -63,7 +54,7 @@ int solve(double ll, double rr)
 			fmul x
 			fmul x //1
 			fld x
-			fadd var
+			fadd ELEVEN
 			fstp y
 			fld b
 			fdiv y //2
@@ -80,7 +71,7 @@ int solve(double ll, double rr)
 			fmul x
 			fmul x //1
 			fld x
-			fadd var
+			fadd ELEVEN
 			fstp y
 			fld b
 			fdiv y //2
@@ -117,28 +108,40 @@ int solve(double ll, double rr)
 			jnz start
 		enddd :
 	}
-	cout << center << endl;
+	if (center >= rr - 0.0001 && center <= rr)
+		;// cout << "No solutions on [" << ll << ',' << rr << ']' << endl;
+	else
+	{
+		hasSolutions = true;
+		cout << center << endl;
+	}
 }
 
 
 int main()
 {
 	// Problem 1
-	
+
 	//I. Найти корни уравнения на отрезке [-10,10] методом деления отрезка пополам.
 	//Определить предварительно отрезки, содержащие корни (перемены знака выражения),
 	//разбивая исходный отрезок на отрезки достаточно малой длины. ax^2 + b/(x + 11) + c = 0
-	/*
+
 	cout << "Insert a: ";
 	cin >> a;
 	cout << "Insert b: ";
 	cin >> b;
 	cout << "Insert c: ";
 	cin >> c;
-	cout << "Solutions:" << endl;
-	solve(-10, 0);
-	solve(0, 10);
-	*/
+	cout << "Solutions: " << endl;
+	for (double i = -10; i < 10; i+=0.01)
+	{
+		solve(i, i + 0.01);
+	}
+	if (!hasSolutions)
+	{
+		cout << "No solutions." << endl;
+	}
+}
 	
 
 	// Problem 2
@@ -254,7 +257,7 @@ int main()
 	// Problem 4
 	
 	// Разработать функцию вычисления значения степенной функции f(x)=(0.5)^x
-	a = 0.5;
+	/*a = 0.5;
 	cin >> x;
 	double h1 = 1;
 	_asm
@@ -272,9 +275,9 @@ int main()
 		fscale				; ST(0) = (2^(z - trunc(z)))*(2^trunc(z)) = 2^(z)
 		fstp s				; Результат
 	}
-	cout << s << endl;
+	cout << s << endl;*/
 	
-}
+//}
 
 /*
 // Для любого x, резерв
